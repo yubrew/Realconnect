@@ -32,4 +32,47 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	
+	public $uses = array(
+		'User'
+	);
+	
+	public $components = array(
+	    'Auth' => array(
+	        'authenticate' => array(
+	            'Form' => array(
+	                'fields' => array(
+						'username' => 'email'
+					),
+	                'scope'	=> array(
+	                	'User.status'	=> 'active'
+	                )
+	            )
+	        )
+	    ),
+	    'Session'
+	);	
+	
+	public $helpers = array(
+    	'Paginator' => array(
+        	'className' => 'CustomPaginator'
+        ),
+        'Session',
+        'Html',
+        'Form',
+        'Time'
+    );
+	
+	protected $user = false;	
+	
+	public function beforeFilter()
+	{
+		parent::beforeFilter();
+		
+		$userData = $this->Auth->user();
+		$this->user = $userData ? array('User' => $userData) : false;
+		$this->set('user', $this->user );
+
+	}
+	
 }
