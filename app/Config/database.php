@@ -87,9 +87,9 @@ else
 			'datasource' => 'Database/Mysql',
 			'persistent' => false,
 			'host' => 'localhost',
-			'login' => 'user',
-			'password' => 'password',
-			'database' => 'database_name',
+			'login' => 'realconn_main',
+			'password' => 'fj305jds23kGD%',
+			'database' => 'realconn_main',
 			'prefix' => '',
 			//'encoding' => 'utf8',
 		);
