@@ -57,9 +57,13 @@
           <div class="nav-collapse">
             <ul class="nav">
               <?php if( !empty($user) ){ ?>
-              	<li class="active"><?php echo $this->Html->link('Dashboard', '/'.$user['User']['type'].'/dashboard') ?></li>
+              	<li class="active"><?php echo $this->Html->link(__('Dashboard'), '/'.$user['User']['type'].'/dashboard') ?></li>
+              	<?php if($user['User']['type'] == 'manager'){ ?>
+              	<li><?php echo $this->Html->link(__('Orders'), '/manager/articles/list') ?></li>
+              	<?php } ?>
+              	
               <?php } else { ?>
-              	<li class="active"><?php echo $this->Html->link('Home', '/') ?></li>
+              	<li class="active"><?php echo $this->Html->link(__('Home'), '/') ?></li>
               <?php } ?>
               
             </ul>

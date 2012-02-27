@@ -285,6 +285,7 @@ $(function(){
 		<?php echo $this->Form->create('WriterArticleSubmit', array('type' => 'post', 'class' => 'form-horizontal manager-edit')); ?>
 	
 		<?php echo $this->Form->hidden('WriterArticleSubmit.id') ?>
+		
 		<?php $errorMessageForField	=	( $f = $this->Form->error('WriterArticleSubmit.manager_notes', array('empty' => __('Field is empty')) ) ) ? $f : false; ?>
 		<div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
 				<label class="control-label" for="WriterArticleSubmitManagerNotes"><?php echo __('Notes')?></label>
@@ -300,7 +301,7 @@ $(function(){
 	
 		<div class="form-actions">	
 		
-		
+			<?php if( $writerAssignment['WriterAssignment']['status'] == 'in_review' ){ ?>
 		
 			<?php echo $this->Form->submit('Accept', array(
 				'name'	=> 'data[WriterArticleSubmit][status]',
@@ -321,7 +322,7 @@ $(function(){
 				'div'	=> false
 			)); ?>
 			
-		
+			<?php } ?>
 		
 			<?php echo $this->Html->link('Back to list', '/manager/dashboard', array('class' => 'btn')); ?>
 		</div>		

@@ -55,7 +55,7 @@ INSERT INTO `article_paragraphs` (`id`, `article_id`, `title`, `content`, `order
 CREATE TABLE IF NOT EXISTS `article_templates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `paragraphs_count` tinyint(3) unsigned NOT NULL,
-  `tempate_file` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `template_file` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `words_count` smallint(10) unsigned NOT NULL,
   `paragraph_title_words_count` smallint(5) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS `article_templates` (
 -- Dumping data for table `article_templates`
 --
 
-INSERT INTO `article_templates` (`id`, `paragraphs_count`, `tempate_file`, `words_count`, `paragraph_title_words_count`) VALUES
-(1, 5, '1.doc', 500, 5);
+INSERT INTO `article_templates` (`id`, `paragraphs_count`, `template_file`, `words_count`, `paragraph_title_words_count`) VALUES
+(1, 5, '1.docx', 500, 5);
 
 -- --------------------------------------------------------
 
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `writer_assignments` (
 --
 
 INSERT INTO `writer_assignments` (`id`, `writer_user_id`, `manager_user_id`, `writer_order_id`, `create_date`, `completed_date`, `status`) VALUES
-(1, 1, 3, 1, '2012-02-20 20:37:29', NULL, 'in_progress');
+(1, 1, 3, 1, '2012-02-20 20:37:29', NULL, 'in_review');
 
 -- --------------------------------------------------------
 

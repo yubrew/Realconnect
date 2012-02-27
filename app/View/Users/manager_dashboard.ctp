@@ -44,7 +44,7 @@
 		        <td><span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo  round($secondsLeft/3600) ?>h</span></td>
 		        <td>
 		        	<?php echo $this->Html->link(__('Review'), '/manager/articles/review/'.$a['WriterAssignment']['id'], null); ?> | 
-		        	<?php echo $this->Html->link(__('Export'), '/manager/articles/export/'.$a['WriterAssignment']['id'], null); ?>
+		        	<?php echo $this->Html->link(__('Export'), '/articles/export/'.$a['WriterAssignment']['id'], null); ?>
 				</td>
 		    </tr>
 		    <?php } ?>

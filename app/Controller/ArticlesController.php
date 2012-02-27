@@ -34,7 +34,7 @@ class ArticlesController extends AppController
 		$writerArticleSubmit = !empty( $writerAssignment['WriterArticleSubmit'] ) ? $writerAssignment['WriterArticleSubmit'][ count($writerAssignment['WriterArticleSubmit']) -1 ] : null; 
 		
 		
-		if( $this->request->is('post') )
+		if( $this->request->is('post') && ( $writerAssignment['WriterAssignment']['status'] == 'in_review' ) )
 		{
 			
 			$data = $this->request->data;
@@ -42,17 +42,20 @@ class ArticlesController extends AppController
 			
 			if($this->WriterArticleSubmit->save($data))
 			{
+				$this->WriterAssignment->id = $writerAssignemnetId;
 			
 				if($action == 'declined')
 				{
-					
+					$this->WriterAssignment->save(array('completed_date' => date('Y-m-d H:i:s'), 'status' => 'rejected'));
 				}
 				else if($action == 'accepted')
 				{
-					
+					$this->WriterAssignment->save(array('completed_date' => date('Y-m-d H:i:s'), 'status' => 'completed'));
 				}
 				else if($action == 'rewrite')
 				{
+					$this->WriterAssignment->save(array('completed_date' => null, 'status' => 'in_progress'));
+					$this->sendRewriteArticleNotification($writerAssignemnetId);
 					
 				}
 				
@@ -162,7 +165,77 @@ class ArticlesController extends AppController
 	public function export($writerAssignemnetId)
 	{
 		
+		
+		if( !($writerAssignment = $this->WriterAssignment->find('first', array(
+			'conditions' => array(
+				'WriterAssignment.manager_user_id' => $this->user['User']['id'],
+				'WriterAssignment.id' => $writerAssignemnetId
+			),
+			'recursive' => 3
+		))))
+		{
+			throw new NotFoundException();
+		}
+		
+		if( App::import('Vendor', 'TransformDoc', array('file' => 'phpwordtemplate'.DS.'DocxTemplate.php')) )
+		{
+
+			
+		    $this->viewClass = 'Media';
+		    
+		    $tempFilename = tempnam(sys_get_temp_dir(), 'article_export_');
+		    
+		    $filename = 'article-'.$writerAssignemnetId.'-'.date('Ymd');
+		    $extension = 'docx';
+		    
+			
+			$templatePath = ROOT . DS . 'app' . DS . 'View'.DS.'Articles'.DS.'docx'.DS. $writerAssignment['WriterOrder']['ArticleTemplate']['template_file'] ;
+			
+			$template = new DocxTemplate( $templatePath, dirname($tempFilename) );
+			
+			if( $template )
+			{
+				$flatData = Set::flatten( $writerAssignment );
+				// var_dump( $flatData );exit;
+				foreach($flatData as $k => $v)
+				{
+					$template->setValue( $k, $v );
+				}
+				
+				
+				$template->save($tempFilename);
+			    
+			    // Render app/webroot/files/example.docx
+			    $params = array(
+			        'id'        => basename($tempFilename),
+			        'name'      => $filename,
+			        'extension' => $extension,
+			        'download'  => true,
+			        'mimeType'  => array(
+			            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+			        ),
+			        'path'      => dirname($tempFilename). DS
+			    );
+			    $this->set($params);		
+			}
+			else
+			{
+				throw new CakeException('docx template not found : '.$templatePath);
+			}
+		
+		}
+		else
+		{
+			throw new CakeException('Php doc Vendor not found');
+		}
+				
 	}
+	
+	public function manager_list()
+	{
+		
+	}
+	
 	
 	private function submitForReview($writerAssignemnetId)
 	{
@@ -201,6 +274,38 @@ class ArticlesController extends AppController
 		
 		return false;
 		
+	}
+	
+	private function sendRewriteArticleNotification($writerAssignemnetId)
+	{
+		$this->WriterAssignment->recursive = 2;
+		
+		if( $writerAssignment = $this->WriterAssignment->read(null, $writerAssignemnetId))
+		{		
+		
+			$this->set('writerAssignment', $writerAssignment );
+		
+			
+			try
+			{
+				// email the manager
+				$email = new CakeEmail();
+				$subject = __('Your article requires a rewrite');
+				$email->from( Configure::read('Email.noreplyAddress'));
+				$email->template('writer_rewrite_article');
+				$email->to( $writerAssignment['Writer']['email'] );
+				$email->subject( $subject );
+				$email->send();
+			}
+			catch(CakeException $e)
+			{
+				
+			}
+			
+			return true;
+		}
+		
+		return false;		
 	}
 	
 	
