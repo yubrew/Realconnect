@@ -1,5 +1,10 @@
-/app/Config
-/app/tmp
+/app/
+/app/tmp/cache/models
+/app/tmp/cache/persistent
+/app/tmp/cache/views
+/app/tmp/logs
+/app/tmp/sessions
+/app/tmp/tests
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /build

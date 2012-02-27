@@ -25,6 +25,7 @@
 		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('phpjs.custom.min');
 		
+		
 	?>
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -52,7 +53,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Syzygy</a>
+          <a class="brand" href="#">Realconnect</a>
           <div class="nav-collapse">
             <ul class="nav">
               <?php if( !empty($user) ){ ?>
