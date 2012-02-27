@@ -6,7 +6,6 @@ class UsersController extends AppController
 		'WriterAssignment'
 	);
 	
-	
 	public function beforeFilter()
 	{
 		
@@ -19,7 +18,20 @@ class UsersController extends AppController
 		
 		if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
-	            return $this->redirect($this->Auth->redirect());
+	        	
+	        	$type = $this->Auth->user('type');
+	        	
+	        	$userPages = array(
+	        		'writer'	=> '/writer/dashboard',
+	        		'manager'	=> '/manager/dashboard',
+	        		'admin'		=> '/admin/dashboard',
+	        		'client'	=> '/'
+	        	);
+	        	
+	            
+	            
+	            $this->redirect( isset($userPages[$type]) ? $userPages[$type] : $this->Auth->redirect());
+	            
 	        } else {
 	            $this->Session->setFlash(__('Username or password is incorrect'), 'default', array(), 'auth');
 	        }
@@ -51,12 +63,15 @@ class UsersController extends AppController
 	    $this->redirect($this->Auth->logout());
 	}	
 	
-	public function home() {
+	public function writer_dashboard() 
+	{
 		
 		$this->paginate	=	array(
 			'conditions'	=>	array(
 				'WriterAssignment.status' => array(
-					'pending', 'in_progress'
+					'pending', 
+					'in_progress',
+					'in_review'
 				)
 			),
 			'limit'	=>	10,
@@ -68,7 +83,23 @@ class UsersController extends AppController
 		$this->set('assignments', $assignments);
 	}
 	
-	
+	public function manager_dashboard()
+	{
+		$this->paginate	= array(
+			'conditions' =>	array(
+				'WriterAssignment.status' => array(
+					'in_review'
+				),
+				'WriterAssignment.manager_user_id' => $this->user['User']['id']
+			),
+			'limit'	=>	10,
+			'recursive' => 3
+		);
+		
+    	$assignments =	$this->paginate('WriterAssignment');		
+		
+		$this->set('assignments', $assignments);		
+	}	
 	
 	
 }

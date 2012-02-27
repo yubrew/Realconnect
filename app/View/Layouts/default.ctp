@@ -1,7 +1,6 @@
 <?php
 
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<?php echo $this->Html->charset(); ?>
@@ -10,26 +9,31 @@
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
+		echo $this->fetch('meta');
 
 		// echo $this->Html->css('cake.generic');
 		
 		echo $this->Html->css('bootstrap');
 		echo $this->Html->css('bootstrap-responsive');
 		echo $this->Html->css('display');
-
-		echo $this->fetch('meta');
 		echo $this->fetch('css');
-		echo $this->fetch('script');
+
 		
 		echo $this->Html->script('jquery.min');
 		echo $this->Html->script('jquery-ui.min');
+		echo $this->Html->script('autoresize.jquery.min');
 		echo $this->Html->script('bootstrap.min');
+		echo $this->Html->script('phpjs.custom.min');
+		
 	?>
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+	<?php 
+	echo $this->Html->script('global');
+	echo $this->fetch('script');
+	 ?>
     <!-- Le fav and touch icons -->
     <!--
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -51,8 +55,8 @@
           <a class="brand" href="#">Syzygy</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <?php if( $user ){ ?>
-              	<li class="active"><?php echo $this->Html->link('Dashboard', '/users/home') ?></li>
+              <?php if( !empty($user) ){ ?>
+              	<li class="active"><?php echo $this->Html->link('Dashboard', '/'.$user['User']['type'].'/dashboard') ?></li>
               <?php } else { ?>
               	<li class="active"><?php echo $this->Html->link('Home', '/') ?></li>
               <?php } ?>
@@ -60,8 +64,8 @@
             </ul>
             
             <ul class="nav pull-right">
-              <?php if( $user ){ ?>
-              		<li style="font-weight:bold"><?php echo $this->Html->link($user['User']['username'], '/users/home') ?></li>
+              <?php if( !empty($user) ){ ?>
+              		<li style="font-weight:bold"><?php echo $this->Html->link($user['User']['username'], '/users/profile') ?></li>
               		<li><?php echo $this->Html->link('Logout', '/users/logout'); ?></li> 
               <?php } else { ?>
               		<li><?php echo $this->Html->link('Login', '/users/login'); ?></li>
