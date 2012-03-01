@@ -55,12 +55,35 @@
           </a>
           <a class="brand" href="#">Realconnect</a>
           <div class="nav-collapse">
+          	<?php
+          	$menuByUserType = array(
+          		'manager' => array(
+          			'/manager/articles/list' => __('Orders')
+          		),
+          		'admin'	=> array(
+          			'/admin/orders/list' => __('Client Orders'),
+          			'/admin/articles/list' => __('Writer Assignments'),
+          			'/admin/users/list' => __('Users')
+          		),
+          		'user' => array(
+          		),
+          		'client' => array(
+          		)
+          	);
+          	
+          	$activeTopMenuItem = empty($activeTopMenuItem) ? false : $activeTopMenuItem;
+          	
+          	?>
+          
             <ul class="nav">
               <?php if( !empty($user) ){ ?>
-              	<li class="active"><?php echo $this->Html->link(__('Dashboard'), '/'.$user['User']['type'].'/dashboard') ?></li>
-              	<?php if($user['User']['type'] == 'manager'){ ?>
-              	<li><?php echo $this->Html->link(__('Orders'), '/manager/articles/list') ?></li>
-              	<?php } ?>
+              	<li class="<?php echo $activeTopMenuItem ? '' : 'active' ?>"><?php echo $this->Html->link(__('Dashboard'), '/'.$user['User']['type'].'/dashboard') ?></li>
+				<?php if(!empty($menuByUserType[$user['User']['type']])){
+					foreach($menuByUserType[$user['User']['type']] as $link => $name){
+						?><li class="<?php echo ( $activeTopMenuItem == $link ) ? 'active' : '' ?>"><?php echo $this->Html->link($name, $link) ?></li><?php
+					}
+				}              	
+				?>
               	
               <?php } else { ?>
               	<li class="active"><?php echo $this->Html->link(__('Home'), '/') ?></li>

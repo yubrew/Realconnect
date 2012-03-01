@@ -27,8 +27,6 @@ class UsersController extends AppController
 	        		'admin'		=> '/admin/dashboard',
 	        		'client'	=> '/'
 	        	);
-	        	
-	            
 	            
 	            $this->redirect( isset($userPages[$type]) ? $userPages[$type] : $this->Auth->redirect());
 	            
@@ -38,25 +36,48 @@ class UsersController extends AppController
 	    }
 	}
 	
-	public function register() {
+	public function admin_add() {
 		
-		if($this->request->is('post')){
+		$this->admin_edit(null);
+	}	
+	
+	public function admin_edit($id)
+	{
+		if($this->request->is('post'))
+		{
 			
-			$this->request->data['User'] = am( $this->request->data['User'], array('registered_date' => date('Y-m-d H:i:s')));
+			if(!$id)
+			{
+				$this->request->data['User'] = am( $this->request->data['User'], array('registered_date' => date('Y-m-d H:i:s')));
+			}
+			else
+			{
+				if( $this->request->data['User']['password'] == '')
+				{
+					unset($this->request->data['User']['password']);
+				}
+			}
+			
 		
-		    if ($this->User->save($this->request->data)) {
+		    if ($this->User->save($this->request->data)) 
+		    {
 		    	
 		    	
-		        $id = $this->User->id;
-		        $this->request->data['User'] = am($this->request->data['User'], array('id' => $id));
-		        $this->Auth->login($this->request->data['User']);
+		        // $id = $this->User->id;
+		        // $this->request->data['User'] = am($this->request->data['User'], array('id' => $id));
+		        // $this->Auth->login($this->request->data['User']);
 		        
-		        $this->Session->setFlash(__('Registration was successfull'));
+		        $this->Session->setFlash( $id ? __('Saved successfully') : __('User created successfully'));
 		        
-		        $this->redirect('/users/home');
+		        $this->redirect('/admin/users/edit/'.$this->User->id);
 		    }
 		}
-	}	
+		else
+		{
+			$this->data = $id ? $this->User->read(null, $id ) : null;
+		}		
+		
+	}
 	
 	public function logout() {
 		
@@ -74,7 +95,7 @@ class UsersController extends AppController
 					'in_review'
 				)
 			),
-			'limit'	=>	10,
+			'limit'	=>	20,
 			'recursive' => 3
 		);
 		
@@ -87,12 +108,9 @@ class UsersController extends AppController
 	{
 		$this->paginate	= array(
 			'conditions' =>	array(
-				'WriterAssignment.status' => array(
-					'in_review'
-				),
 				'WriterAssignment.manager_user_id' => $this->user['User']['id']
 			),
-			'limit'	=>	10,
+			'limit'	=>	20,
 			'recursive' => 3
 		);
 		
@@ -102,4 +120,27 @@ class UsersController extends AppController
 	}	
 	
 	
+	public function admin_dashboard()
+	{
+		
+	}
+	
+	public function admin_list()
+	{
+		$this->paginate	= array(
+			'conditions' =>	array(
+			),
+			'limit'	=>	20,
+			'recursive' => -1
+		);
+		
+    	$users =	$this->paginate('User');		
+		
+		$this->set('users', $users);			
+	}
+	
+	public function profile()
+	{
+		
+	}
 }

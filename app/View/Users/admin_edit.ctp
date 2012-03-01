@@ -1,8 +1,9 @@
+<?php $this->set( 'activeTopMenuItem','/admin/users/list'); ?>
 <div>
-	<h1>Register</h1>
+	<h1><?php echo __('Edit a User #%s', $this->data['User']['id']) ?></h1>
 	
 	<?php echo $this->Form->create('User', array('type' => 'post', 'class' => 'form-horizontal')); ?>
-	
+	<?php echo $this->Form->hidden('id'); ?>
 	<legend><?php echo __('All fields are mandatory') ?></legend>
 	<?php $errorMessageForField	=	( $f = $this->Form->error('User.email', array('empty' => __('Email is invalid'), 'unique' => __('Email is already taken' ) ) ) ) ? $f : null; ?>
 	<div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
@@ -49,13 +50,14 @@
 															'div'	=>	array("class" => "controls"),
 															'after'	=>	( $errorMessageForField ? '<span class="help-inline">'.$errorMessageForField.'</span>' : "" ),
 															'error'	=>	false,
-															'type'	=> 'password')); ?>
+															'type'	=> 'password',
+															'value'	=> '')); ?>
 	</div>
 	
 	
 	
 	<div class="form-actions">
-	<?php 					echo $this->Form->button('Register', array(
+	<?php 					echo $this->Form->button('Edit', array(
 															'label'	=>	false,
 															'div'	=>	false,
 				    										'class' => 'btn btn-primary',

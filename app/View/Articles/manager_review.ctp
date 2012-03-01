@@ -39,15 +39,8 @@ $progressPercent = $wordsTotal > 0 ?  min(100, 100*$wordsCount/$wordsTotal ) : 0
 
 $updateAllowed = false;
 
- if( $user['User']['type'] == 'writer' )
- {
- 	$updateAllowed = in_array( $writerAssignment['WriterAssignment']['status'], array( 'pending','in_progress' ) );
- }
- else if( $user['User']['type'] == 'manager' )
- {
- 	// $updateAllowed = ( $writerAssignment['WriterAssignment']['status'] == 'in_review' );
- 	$updateAllowed = in_array( $writerAssignment['WriterAssignment']['status'], array( 'pending','in_progress','in_review' ) );
- }
+$updateAllowed = in_array( $writerAssignment['WriterAssignment']['status'], array( 'pending','in_progress','in_review' ) );
+
 
 ?>
 <script type="text/javascript">
@@ -63,7 +56,11 @@ $(function(){
 	var jSubmitForReviewButton = $("#SubmitForReview");
 	var jSubmitForReviewHiddenInput = $("#WriterAssignmentSubmitForReview");
 	
+
+	
 	$("textarea").autoResize({ extraSpace: 40 });
+	
+
 	
 	<?php if(!$updateAllowed){ ?>
 		
@@ -195,12 +192,12 @@ $(function(){
 		</div>
 	</div>
 	
-	<?php if($user['User']['type'] == 'manager') { ?>
-		<?php if( !empty($this->data['WriterArticleSubmit']['id'])){ ?>
-		<h4>Article Status</h1>
-		<?php echo __('Submitted at ').date('H:i:s m/d/Y ', strtotime( $this->data['WriterArticleSubmit']['create_date']) ).__(' by ').$writerAssignment['Writer']['username'] ?>
-		<?php } ?> 
-	<?php } ?>
+	
+	<?php if( !empty($this->data['WriterArticleSubmit']['id'])){ ?>
+	<h4>Article Status</h1>
+	<?php echo __('Submitted at ').date('H:i:s m/d/Y ', strtotime( $this->data['WriterArticleSubmit']['create_date']) ).__(' by ').$writerAssignment['Writer']['username'] ?>
+	<?php } ?> 
+
 	
 </div>
 
@@ -269,10 +266,29 @@ $(function(){
 			'type'	=> 'text'
 		)); ?>
 </div>	
+			
 
+	<?php if($this->data['WriterArticleSubmit']['id']){ ?>
+	
+	<?php echo $this->Form->hidden('WriterArticleSubmit.id') ?>
+	
+	<?php $errorMessageForField	=	( $f = $this->Form->error('WriterArticleSubmit.manager_notes', array('empty' => __('Field is empty')) ) ) ? $f : false; ?>
+	<div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
+			<label class="control-label" for="WriterArticleSubmitManagerNotes"><?php echo __('Notes')?></label>
+			<?php echo $this->Form->input('WriterArticleSubmit.manager_notes', array(
+				'label'	=>	false,
+				'class'	=>	'input-xxlarge',
+				'div'	=>	array("class" => "controls"),
+				'after'	=>	( $errorMessageForField ? '<span class="help-inline">'.$errorMessageForField.'</span>' : '' ),
+				'error'	=>	false,
+				'type'	=> 'textarea'
+			)); ?>
+	</div>			
 
-<?php if($user['User']['type'] == 'writer'){ ?>
-	<div class="form-actions">
+	<?php } ?>
+
+	<div class="form-actions">	
+	
 		<?php
 		echo $updateAllowed ? $this->Form->button(__('Save'), array(
 				'label'	=>	false,
@@ -280,78 +296,35 @@ $(function(){
 				'class' => 'btn btn-primary',
 				'type'	=>	'submit'
 		)) : ''; 
-		?>
-		
-		<?php echo $updateAllowed ? ( $this->Form->button(__('Submit For Review'), array(
-				'label'	=> false,
-				'div'	=> false,
-				'class' => 'btn btn-danger',
-				'type'	=> 'submit',
-				'id'	=> 'SubmitForReview'
-		) + ( $progressPercent >= 100 ? array() : array( 'disabled' => 'disabled' ) ) ) ): '';
-														
-		?>
-		<?php echo $this->Html->link(__('Back to list'), '/writer/dashboard', array('class' => 'btn')); ?>
-	</div>	
+		?>			
 	
-	</form>	
-	<?php } else if( $user['User']['type'] == 'manager') { ?>
-			
-		<?php // echo $this->Form->create('WriterArticleSubmit', array('type' => 'post', 'class' => 'form-horizontal manager-edit')); ?>
+		<?php if( $writerAssignment['WriterAssignment']['status'] == 'in_review' ){ ?>
 	
-		<?php echo $this->Form->hidden('WriterArticleSubmit.id') ?>
+		<?php echo $this->Form->submit('Accept', array(
+			'name'	=> 'data[WriterArticleSubmit][status]',
+			'class' => 'btn btn-success',
+			'value'	=> 'accepted',
+			'div'	=> false
+		)); ?>
+		<?php echo $this->Form->submit('Rewrite',array(
+			'name'	=> 'data[WriterArticleSubmit][status]',
+			'class' => 'btn btn-warning',
+			'value'	=> 'rewrite',
+			'div'	=> false
+		)); ?>
+		<?php echo $this->Form->submit('Decline', array(
+			'name'	=> 'data[WriterArticleSubmit][status]',
+			'class' => 'btn btn-danger',
+			'value'	=> 'declined',
+			'div'	=> false
+		)); ?>
 		
-		<?php $errorMessageForField	=	( $f = $this->Form->error('WriterArticleSubmit.manager_notes', array('empty' => __('Field is empty')) ) ) ? $f : false; ?>
-		<div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
-				<label class="control-label" for="WriterArticleSubmitManagerNotes"><?php echo __('Notes')?></label>
-				<?php echo $this->Form->input('WriterArticleSubmit.manager_notes', array(
-					'label'	=>	false,
-					'class'	=>	'input-xxlarge',
-					'div'	=>	array("class" => "controls"),
-					'after'	=>	( $errorMessageForField ? '<span class="help-inline">'.$errorMessageForField.'</span>' : '' ),
-					'error'	=>	false,
-					'type'	=> 'textarea'
-				)); ?>
-		</div>			
+		<?php } ?>
 	
-		<div class="form-actions">	
-		
-			<?php
-			echo $updateAllowed ? $this->Form->button(__('Save'), array(
-					'label'	=>	false,
-					'div'	=>	false,
-					'class' => 'btn btn-primary',
-					'type'	=>	'submit'
-			)) : ''; 
-			?>			
-		
-			<?php if( $writerAssignment['WriterAssignment']['status'] == 'in_review' ){ ?>
-		
-			<?php echo $this->Form->submit('Accept', array(
-				'name'	=> 'data[WriterArticleSubmit][status]',
-				'class' => 'btn btn-success',
-				'value'	=> 'accepted',
-				'div'	=> false
-			)); ?>
-			<?php echo $this->Form->submit('Rewrite',array(
-				'name'	=> 'data[WriterArticleSubmit][status]',
-				'class' => 'btn btn-warning',
-				'value'	=> 'rewrite',
-				'div'	=> false
-			)); ?>
-			<?php echo $this->Form->submit('Decline', array(
-				'name'	=> 'data[WriterArticleSubmit][status]',
-				'class' => 'btn btn-danger',
-				'value'	=> 'declined',
-				'div'	=> false
-			)); ?>
-			
-			<?php } ?>
-		
-			<?php echo $this->Html->link('Back to list', '/manager/dashboard', array('class' => 'btn')); ?>
-		</div>		
-		<?php echo $this->Form->end() ?>
-	<?php } ?> 
+		<?php echo $this->Html->link('Back to list', '/manager/dashboard', array('class' => 'btn')); ?>
+	</div>		
+	<?php echo $this->Form->end() ?>
+
 
 
 </div>

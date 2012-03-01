@@ -1,0 +1,1 @@
+<h3>New order has been submitted</h3>

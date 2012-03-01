@@ -34,7 +34,7 @@
  */
 	Configure::write('debug', 1);
 	
-	Configure::write('Email.noreplyAddress', 'noreply@'.strtolower(env('HTTP_HOST')));
+	Configure::write('Email.noreplyAddress', 'noreply@'. preg_replace('/^www\./','',strtolower(env('HTTP_HOST')) ));
 
 /**
  * Configure the Error handler used to handle errors for your application.  By default
