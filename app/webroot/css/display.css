@@ -5,3 +5,12 @@ body { padding-top: 60px; /* 60px to make the container go all the way to the bo
 .deadline-passed { color: red; }
 
 #articleEditPage {}
+
+.order-payment {  }
+	.order-payment form { margin-top:2em; }
+	  .order-payment form input { 
+	font-size: 20px;
+	font-weight:bold;
+	width: 4em;
+	height: 1.5em;
+  }

@@ -57,16 +57,7 @@ class ClientsController extends AppController
 				$this->Order->save();
 				
 				$this->redirect('/orders/pay/'.$this->Order->id);
-				
-				/*
-				$this->User->create();
-				
-				$this->Order->data['Order'] = am($this->Order->data['Order'], array(
-					'user_id' 		=> $this->User->id,
-					'create_date'	=> date('Y-m-d H:i:s')
-				));
-				$this->Order->create();
-				*/
+
 				
 			}
 			

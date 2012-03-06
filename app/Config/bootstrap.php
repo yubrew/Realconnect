@@ -124,6 +124,8 @@ Cache::config('default', array('engine' => 'File'));
  */
  
  App::uses('CakeEmail', 'Network/Email');
+ CakePlugin::load('PaypalIpn', array('routes' => false, 'bootstrap' => true));
+ 
  
  
  function jsphp_str_word_count($text)

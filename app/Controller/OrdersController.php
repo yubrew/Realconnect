@@ -16,7 +16,7 @@ class OrdersController extends AppController
 	{
 		parent::beforeFilter();
 		
-		$this->Auth->allow('pay');
+		$this->Auth->allow('pay', 'paypal_ipn','payment_return');
 	}
 	
 	function admin_list()
@@ -24,9 +24,9 @@ class OrdersController extends AppController
 		$this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
 		
 		$this->paginate	= array(
-			'conditions' =>	array(),
-			'limit'	=>	20,
-			'recursive' => 3
+			'conditions' 	=>	array(),
+			'limit'			=>	20,
+			'recursive' 	=> 3
 		);
 		
     	$orders =	$this->paginate('Order');		
@@ -227,7 +227,27 @@ class OrdersController extends AppController
 		$order = $this->Order->read(null, $orderId);
 		
 		$this->set(compact('order'));
+		$this->helpers[]='PaypalIpn.Paypal';
 	}
+	
+	
+	/**
+	 * Paypal landing page
+	 * @var $orderId 
+	 * @var $paymentResult - 'success', 'cancel'
+	 */
+	public function payment_return( $orderId, $paymentResult = 'success' )
+	{
+		// /payment_return/6?tx=47079660X7883790R&st=Completed&amt=36.00&cc=USD&cm=&item_number=6
+		
+		$order = $this->Order->read(null, $orderId);
+		
+		$transactionId = empty($this->request->query['tx']) ? false : $this->request->query['tx'];
+		
+		$this->set(compact('order','paymentResult'));
+		
+	}
+	
 	
 	private function newAssignmentNotification($writerAssignmentId)
 	{

@@ -1,6 +1,6 @@
 <?php 
 
-var_dump($this->validationErrors);
+
 
 ?>      
       <div class="hero-unit">
@@ -15,8 +15,6 @@ var_dump($this->validationErrors);
 		    <div class="span7">
 		      <h2>Article details</h2>
 		      <br />
-		      
-		      
 		      
 				<?php $errorMessageForField	=	( $f = $this->Form->error('User.username', array('empty' => __('Name is empty' ) ) ) ) ? $f : false; ?>
 				<div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
