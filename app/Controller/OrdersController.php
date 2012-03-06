@@ -4,6 +4,7 @@ class OrdersController extends AppController
 {
 	public $uses = array(
 		'Order',
+		'WriterOrder',
 		'ClientOrder',
 		'OrderDeliveryOption',
 		'ArticleTemplate',
@@ -53,70 +54,11 @@ class OrdersController extends AppController
 			$keywordDataInitial = empty($this->request->data['WriterOrder']['Keyword']) ? array(): $this->request->data['WriterOrder']['Keyword'];
 			$keywordIndex = 0;
 			 
+			 
+			 
 			if(!empty($this->request->data['WriterOrder']['keywords']))
 			{
-				$keywordsArray = explode("\n", $this->request->data['WriterOrder']['keywords']);
-				$cleanKeywords = array();
-				
-				$keywordDataArray = array();
-				$keywordIndex = 0;
-				
-				foreach($keywordsArray as $kw)
-				{
-					$keyword = trim($kw);
-					if($keyword != "")
-					{
-						$cleanKeywords[] = $keyword;
-						$kwdata = array( 'keyword' => $keyword );
-						
-						if(!empty($keywordDataInitial[$keywordIndex]['id']))
-						{
-							$kwdata['id'] = $keywordDataInitial[$keywordIndex]['id'];
-						}
-						else
-						{
-							$kwdata['create_date'] = date('Y-m-d H:i:s');
-						}
-						
-						$keywordDataArray[$keywordIndex] = $kwdata;
-						
-						$keywordIndex++;
-					}
-				}
-				
-
-				if( $keywordDataArray )
-				{	
-					$this->request->data['WriterOrder']['Keyword'] = $keywordDataArray;
-				}
-				
-				/*
-				$keywords = $this->request->data['WriterOrder']['Keyword'];
-				
-				foreach( $this->request->data['WriterOrder']['Keyword'] as $keywordIndexndex => $keyword )
-				{
-					$kw = trim($keyword['keyword']);
-					if( $kw == "" )
-					{
-						if(!empty($keyword['id']))
-						{
-							$this->Keyword->delete($keyword['id']);
-						}
-						unset($keywords[$keywordIndexndex]);
-					}
-				}
-				
-				
-				if( $keywords )
-				{
-					$this->request->data['WriterOrder']['Keyword'] = array_values($keywords);
-				}
-				else
-				{
-					unset($this->request->data['WriterOrder']['Keyword']);
-				}
-				*/
-				
+				$this->request->data['WriterOrder']['Keyword'] = $this->Keyword->unpackKeywords($this->request->data['WriterOrder']['keywords']);
 			}
 		
 		    if ($this->Order->saveAssociated($this->request->data, array('validate' => 'first', 'deep' => true))) 
@@ -254,7 +196,94 @@ class OrdersController extends AppController
 	}
 	
 	
-	private function newAssignmentNotification($writerAssignmentId)
+	public function manager_list( $status = 'pending') 
+	{
+		$this->paginate	= array(
+			'conditions' =>	array(
+				'Order.payment_status' => 'completed',
+				'Order.status'		   => $status
+			),
+			'limit'	=>	20,
+			'recursive' => 3
+		);
+		
+    	$orders =	$this->paginate('Order');		
+		
+		$this->set(compact('orders', 'status'));	
+	}	
+	
+	public function manager_view($orderId)
+	{
+		$this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
+		$this->Order->recursive = 2;
+		$this->WriterOrder->bindModel(array('hasOne' => array('WriterAssignment')), false);
+		
+		$orderData = $order = $this->Order->read(null, $orderId);
+		
+		$writers = $this->User->find('list', array('conditions' => array('User.type' => 'writer'), 'fields' => array('id', 'username') ));
+		$articleTemplates =	$this->ArticleTemplate->find('list', array('fields' => array('ArticleTemplate.id', 'ArticleTemplate.name')));
+		$exisitngAssignmentsCount = array(
+			'total'			=> $this->WriterAssignment->find('count', array('conditions' => array('WriterOrder.order_id' => $orderId))),
+			'in_progress'	=> $this->WriterAssignment->find('count', array('conditions' => array('WriterOrder.order_id' => $orderId, 'WriterAssignment.status' => 'in_progress'))),
+			'completed'		=> $this->WriterAssignment->find('count', array('conditions' => array('WriterOrder.order_id' => $orderId, 'WriterAssignment.status' => 'completed')))
+		); 
+		
+		
+		
+		if($this->request->is('post'))
+		{
+			
+			$keywordDataInitial = empty($this->request->data['WriterOrder']['Keyword']) ? array(): $this->request->data['WriterOrder']['Keyword'];
+			$keywordIndex = 0;
+			 
+			 
+			 
+			if(!empty($this->request->data['WriterOrder']['keywords']))
+			{
+				$this->request->data['Keyword'] = $this->Keyword->unpackKeywords($this->request->data['WriterOrder']['keywords']);
+			}
+		
+		    if ($this->WriterOrder->saveAssociated($this->request->data, array('validate' => 'first', 'deep' => true))) 
+		    {
+		        // remove keywords
+		        
+				if(!empty($keywordDataInitial))
+				{
+					for($j = $keywordIndex; $j < count($keywordDataInitial); $j++ )
+					{
+						if(!empty($keywordDataInitial[$j]['id']))
+						{
+							$this->Keyword->delete($keywordDataInitial[$j]['id']);
+						}
+					}
+				}		   
+				
+				// Order status update
+				
+				$this->Order->id = $orderId;
+				$this->Order->save(array(
+					'status'	=> 'in_progress'
+				), false);
+				
+				$this->Session->setFlash( __('Assignment was created successfully'));     
+		        
+		        $this->redirect('/manager/orders/view/'.$orderId);
+		    }
+		}
+		else
+		{
+			// $orderData['WriterOrder']['keywords'] = join("\n", Set::extract('/WriterOrder/Keyword/keyword', $orderData) );
+			
+			// $this->data = $orderData;
+			
+		}		
+		
+		
+		
+		$this->set(compact('order', 'writers', 'articleTemplates', 'exisitngAssignmentsCount'));
+	}
+	
+	protected function newAssignmentNotification($writerAssignmentId)
 	{
 		$this->WriterAssignment->recursive = 3;
 		

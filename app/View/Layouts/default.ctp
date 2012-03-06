@@ -59,7 +59,7 @@
           	<?php
           	$menuByUserType = array(
           		'manager' => array(
-          			'/manager/articles/list' => __('Orders')
+          			'/manager/orders/list' => __('Client Orders')
           		),
           		'admin'	=> array(
           			'/admin/orders/list' => __('Client Orders'),

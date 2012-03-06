@@ -1,5 +1,6 @@
 <h1><?php echo __('Dashboard') ?></h1>
-
+<br />
+<h3>My Writer Assignments</h3>
 <?php
 	$this->Paginator->options(array('url' => array('controller' => 'manager', 'action' => 'dashboard') ));
 	$pagesParams	=	$this->Paginator->params();
@@ -8,14 +9,16 @@
 <br />
 
 <?php if( $assignments ) { ?>
-
-	<table cellpadding="0" cellspacing="0" style="width: 700px;" class="table table-striped table-bordered table-condensed">
+	
+	<table cellpadding="0" cellspacing="0" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
 		        <th><?php echo $this->Paginator->sort('WriterAssignment.id', 'ID'); ?></th>
+		        
 		        <th><?php echo $this->Paginator->sort('WriterAssignment.create_date', __('Date')); ?></th>
 		        <th><?php echo $this->Paginator->sort('WriterAssignment.status', __('Status')); ?></th>
 		        <th><?php echo $this->Paginator->sort('Writer.username', __('Writer')); ?></th>
+		        <th><?php echo  __('Order ID'); ?></th>
 		        <th><?php echo __('Keywords') ?></th>
 		        <th><?php echo __('Hours left') ?></th>
 		        <th><?php echo __('Actions') ?></th>
@@ -37,9 +40,12 @@
 			?>
 		    <tr>
 		        <td><?php echo h($a['WriterAssignment']['id']); ?> </td>
+		        
 		        <td><?php echo date( 'm/d/y', $assignmentStartTimestamp); ?> </td>
 		        <td><?php echo h($a['WriterAssignment']['status']); ?></td>
+		        
 		        <td><?php echo h($a['Writer']['username']); ?></td>
+		        <td><?php echo h($a['WriterOrder']['Order']['id']); ?> </td>
 		        <td><?php $keywords = Set::extract( '/WriterOrder/Keyword/keyword', $a ); echo join(', ',$keywords); ?></td>
 		        <td><span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo  round($secondsLeft/3600) ?>h</span></td>
 		        <td>
