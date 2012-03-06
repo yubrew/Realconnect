@@ -52,6 +52,11 @@ class PagesController extends AppController {
  */
 	public $uses = array();
 
+	public function beforeAction()
+	{
+		parent::beforeAction();
+	}
+
 /**
  * Displays a view
  *

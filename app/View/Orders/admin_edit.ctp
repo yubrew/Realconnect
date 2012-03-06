@@ -1,4 +1,28 @@
-<?php $this->set( 'activeTopMenuItem','/admin/orders/list'); ?>
+<?php 
+
+$this->set( 'activeTopMenuItem','/admin/orders/list');
+
+$this->start('script');
+echo $this->Html->script('atd/jquery.atd');
+echo $this->Html->script('atd/jquery.atd.textarea');
+echo $this->Html->script('atd/csshttprequest');
+$this->end();
+$this->start('css');
+echo $this->Html->css('atd/atd');
+$this->end();
+
+ ?>
+<script type="text/javascript">
+$(function(){
+	
+	$("textarea").autoResize({ extraSpace: 40 });
+	
+	// AtD.rpc_css = 'http://www.polishmywriting.com/atd-jquery/server/proxycss.php?data=';
+	AtD.rpc_css = "<?php echo $this->Html->url('/proxycss.php', true); ?>?data=";
+	$("#WriterOrderKeywords").addProofreader();
+});		
+
+</script>
 <h1><?php echo __('Edit an Order #%s', $this->data['Order']['id']) ?></h1>
 	
 <br />
@@ -29,7 +53,7 @@
 	</div>
 </div>
 
-<?php $errorMessageForField	=	( $f = $this->Form->error('Order.articles_count', array('empty' => __('Field is invalid' ) ) ) ) ? $f : false; ?>
+<?php $errorMessageForField	=	( $f = $this->Form->error('Order.articles_count', array('empty' => __('Field is invalid' ), 'range' => __('There should be at least 5 articles') ) ) ) ? $f : false; ?>
 <div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
 		<label class="control-label" for="OrderArticlesCount"><?php echo __('Articles count') ?></label>
 		<?php echo $this->Form->input('Order.articles_count', array(
@@ -113,6 +137,27 @@
 
 <h3>Keywords</h3>
 
+<br />
+
+<?php $errorMessageForField	=	( $f = $this->Form->error('WriterOrder.keywords', array('empty' => __('Field is invalid' ) ) ) ) ? $f : false; ?>
+<div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
+		<label class="control-label" for="WriterOrderDescription"><?php echo __('Manager Order description') ?></label>
+		<?php echo $this->Form->input('WriterOrder.keywords', array(
+			'label'	=>	false,
+			'class'	=>	'input-xxlarge',
+			'div'	=>	array("class" => "controls"),
+			'after'	=>	( $errorMessageForField ? '<span class="help-inline">'.$errorMessageForField.'</span>' : '' ),
+			'error'	=>	false,
+			'type'	=> 'textarea'
+		)); ?>
+</div>	
+
+<?php foreach($this->data['WriterOrder']['Keyword'] as $i => $kw ){
+	echo $this->Form->hidden('WriterOrder.Keyword.'.$i.'.id');
+}
+?>
+
+<?php /*
 <?php for($i=0; $i<10; $i++){ $fieldName = 'WriterOrder.Keyword.'.$i.'.keyword'; ?>
 	<?php echo $this->Form->hidden('WriterOrder.Keyword.'.$i.'.id') ?>
 	<?php $errorMessageForField	=( $f = $this->Form->error($fieldName, array('empty' => __('Field is empty' ) ) ) ) ? $f : false; ?>
@@ -130,6 +175,8 @@
 			
 	</div>
 <?php } ?>
+
+*/ ?>
 
 <div class="form-actions">
 		<?php

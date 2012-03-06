@@ -11,6 +11,14 @@ class OrdersController extends AppController
 		'WriterAssignment'
 	);	
 	
+	
+	function beforeFilter()
+	{
+		parent::beforeFilter();
+		
+		$this->Auth->allow('pay');
+	}
+	
 	function admin_list()
 	{
 		$this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
@@ -42,12 +50,50 @@ class OrdersController extends AppController
 		if($this->request->is('post'))
 		{
 			
+			$keywordDataInitial = empty($this->request->data['WriterOrder']['Keyword']) ? array(): $this->request->data['WriterOrder']['Keyword'];
+			$keywordIndex = 0;
 			 
-			if(!empty($this->request->data['WriterOrder']['Keyword']))
+			if(!empty($this->request->data['WriterOrder']['keywords']))
 			{
+				$keywordsArray = explode("\n", $this->request->data['WriterOrder']['keywords']);
+				$cleanKeywords = array();
+				
+				$keywordDataArray = array();
+				$keywordIndex = 0;
+				
+				foreach($keywordsArray as $kw)
+				{
+					$keyword = trim($kw);
+					if($keyword != "")
+					{
+						$cleanKeywords[] = $keyword;
+						$kwdata = array( 'keyword' => $keyword );
+						
+						if(!empty($keywordDataInitial[$keywordIndex]['id']))
+						{
+							$kwdata['id'] = $keywordDataInitial[$keywordIndex]['id'];
+						}
+						else
+						{
+							$kwdata['create_date'] = date('Y-m-d H:i:s');
+						}
+						
+						$keywordDataArray[$keywordIndex] = $kwdata;
+						
+						$keywordIndex++;
+					}
+				}
+				
+
+				if( $keywordDataArray )
+				{	
+					$this->request->data['WriterOrder']['Keyword'] = $keywordDataArray;
+				}
+				
+				/*
 				$keywords = $this->request->data['WriterOrder']['Keyword'];
 				
-				foreach( $this->request->data['WriterOrder']['Keyword'] as $index => $keyword )
+				foreach( $this->request->data['WriterOrder']['Keyword'] as $keywordIndexndex => $keyword )
 				{
 					$kw = trim($keyword['keyword']);
 					if( $kw == "" )
@@ -56,9 +102,10 @@ class OrdersController extends AppController
 						{
 							$this->Keyword->delete($keyword['id']);
 						}
-						unset($keywords[$index]);
+						unset($keywords[$keywordIndexndex]);
 					}
 				}
+				
 				
 				if( $keywords )
 				{
@@ -68,15 +115,29 @@ class OrdersController extends AppController
 				{
 					unset($this->request->data['WriterOrder']['Keyword']);
 				}
+				*/
+				
 			}
-			
 		
 		    if ($this->Order->saveAssociated($this->request->data, array('validate' => 'first', 'deep' => true))) 
 		    {
-		        $this->Session->setFlash( $id ? __('Saved successfully') : __('Order created successfully'));
+		        // remove keywords
+		        
+				if(!empty($keywordDataInitial))
+				{
+					for($j = $keywordIndex; $j < count($keywordDataInitial); $j++ )
+					{
+						if(!empty($keywordDataInitial[$j]['id']))
+						{
+							$this->Keyword->delete($keywordDataInitial[$j]['id']);
+						}
+					}
+				}		   
+				
+				$this->Session->setFlash( $id ? __('Saved successfully') : __('Order created successfully'));     
 		        
 		        /*
-		        if( !$id )
+		        if( !$keywordIndexd )
 		        {
 		        	$this->newOrderNotification($this->Order->id);
 		        }
@@ -87,7 +148,10 @@ class OrdersController extends AppController
 		}
 		else
 		{
+			$orderData['WriterOrder']['keywords'] = join("\n", Set::extract('/WriterOrder/Keyword/keyword', $orderData) );
+			
 			$this->data = $orderData;
+			
 		}		
 		
 		$this->set('clients', $this->User->find('list', array('conditions' => array('User.type' => 'client'), 'fields' => array('id', 'username') )) );
@@ -97,6 +161,8 @@ class OrdersController extends AppController
 		
 		
 	}	
+	
+	
 	
 	public function admin_assign($id) 
 	{
@@ -154,6 +220,13 @@ class OrdersController extends AppController
 		}
 		
 		return false;
+	}
+	
+	public function pay($orderId)
+	{
+		$order = $this->Order->read(null, $orderId);
+		
+		$this->set(compact('order'));
 	}
 	
 	private function newAssignmentNotification($writerAssignmentId)

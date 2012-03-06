@@ -53,7 +53,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Realconnect</a>
+          <?php echo $this->Html->link('Realconnect','/',array('class' => 'brand')) ?>
+          
           <div class="nav-collapse">
           	<?php
           	$menuByUserType = array(
