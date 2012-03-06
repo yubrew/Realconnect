@@ -114,12 +114,16 @@ class AppController extends Controller {
 	      		));
 	      }
 	      
-	      
 	    } 
 	    else 
 	    { 
 	      //Oh no, better look at this transaction to determine what to do; like email a decline letter. 
 	    } 
-  } 	
+	}
+	
+	protected function orderPaidSuccessfully($orderId)
+	{
+		
+	} 	
 	
 }
