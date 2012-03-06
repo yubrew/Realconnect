@@ -6,12 +6,8 @@
 	
 	<?php
 	
-	// http://www.realconnect.mobi/orders/thank_you?tx=92C01753L9318762E&st=Completed&amt=36.00&cc=USD&cm=&item_number=
-	
-	
 	$articlesCount = $order['Order']['articles_count'];
 	$amount = round( $articlesCount * (float)$order['OrderDeliveryOption']['price_per_article'], 2);
-	
 	
 	?>
 	

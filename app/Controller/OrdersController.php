@@ -226,6 +226,11 @@ class OrdersController extends AppController
 	{
 		$order = $this->Order->read(null, $orderId);
 		
+		if($order['Order']['payment_status'] == 'completed')
+		{
+			$this->redirect('/orders/payment_return/' . $orderId );
+		}
+		
 		$this->set(compact('order'));
 		$this->helpers[]='PaypalIpn.Paypal';
 	}

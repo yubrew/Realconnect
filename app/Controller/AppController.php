@@ -109,9 +109,12 @@ class AppController extends Controller {
 	      {
 	      		$this->Order->id = $itemId;
 	      		$this->Order->save(array(
-	      			'payment_status'	=> 'completed',
+	      			'payment_status'					=> 'completed',
+	      			'instant_payment_notification_id'	=> $transaction['InstantPaymentNotification']['id']
 	      			
 	      		));
+	      		
+	      		$this->orderPaidSuccessfully($itemId);
 	      }
 	      
 	    } 
@@ -123,7 +126,41 @@ class AppController extends Controller {
 	
 	protected function orderPaidSuccessfully($orderId)
 	{
+		// $this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
+		// $this->Order->recursive = 3;
 		
+		if( $order = $this->Order->read(null, $orderId) )
+		{
+			// $this->set('order', $order);
+			
+			try
+			{
+				// email the manager
+				$email = new CakeEmail();
+				
+				$subject = __('Your order was submitted successfully');
+				
+				$email->from( Configure::read('Email.noreplyAddress'));
+				
+				$email->viewVars(array('order' => $order));
+				
+				$email->helpers(array('Html', 'Text'));
+				
+				$email->template('client_new_order');
+				
+				$email->to( $order['Client']['email'] );
+				
+				$email->subject( $subject );
+				$email->send();
+			}
+			catch(CakeException $e)
+			{
+				
+			}			
+			
+		}
+		
+		return false;		
 	} 	
 	
 }
