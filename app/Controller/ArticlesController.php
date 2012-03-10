@@ -33,6 +33,8 @@ class ArticlesController extends AppController
 			throw new NotFoundException();
 		}
 		
+		
+		
 		$statuses = array( 'Accept' => 'accepted', 'Decline' => 'declined', 'Rewrite' => 'rewrite');
 		$writerArticleSubmit = !empty( $writerAssignment['WriterArticleSubmit'] ) ? $writerAssignment['WriterArticleSubmit'][ count($writerAssignment['WriterArticleSubmit']) -1 ] : null; 
 		

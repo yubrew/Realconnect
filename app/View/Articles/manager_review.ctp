@@ -137,7 +137,8 @@ $(function(){
 
 <div class="well">
 
-	<h1>Order #<?php echo $writerAssignment['WriterOrder']['id'] ?>
+	<h1>Article #<?php echo $writerAssignment['WriterAssignment']['id'] ?>
+	
 	
 
 	
@@ -156,6 +157,8 @@ $(function(){
 	</span>
 
 	</h1>
+	
+	<h2>Order #<?php echo $writerAssignment['WriterOrder']['Order']['id'] ?></h2>
 	
 	<?php if($writerAssignment['WriterAssignment']['status'] == 'completed'){ ?>
 	<p><?php echo $this->Html->link( __('Export'), '/articles/export/'.$writerAssignment['WriterAssignment']['id']) ?></p>

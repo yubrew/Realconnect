@@ -60,7 +60,7 @@ $(function(){
 <?php if($order['Order']['status'] != 'completed'){ ?>
 
 <div>
-	<h2><?php echo __('Add a Writer Assignment') ?></h2>
+	<h2><?php echo __('Assign Keywords') ?></h2>
 	<br />
 	<?php if( !empty($this->validationErrors['Article']) || !empty($this->validationErrors['ArticleParagraph']) ){  ?>
 	<div class="alert alert-error">Please correct errors below : </div>
