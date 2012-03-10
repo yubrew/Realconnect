@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
 --
 
 INSERT INTO `articles` (`id`, `user_id`, `writer_assignment_id`, `create_date`, `youtube_link`) VALUES
-(1, 6, 3, '2012-03-01 05:19:54', 'youtube 1');
+(1, 6, 1, '2012-03-10 04:44:31', '');
 
 -- --------------------------------------------------------
 
@@ -42,10 +42,10 @@ CREATE TABLE IF NOT EXISTS `article_paragraphs` (
 --
 
 INSERT INTO `article_paragraphs` (`id`, `article_id`, `title`, `content`, `order`) VALUES
-(1, 1, 'title title title title title5', 'Paragraph 1 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 1 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 1 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 1 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 1 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 1 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 1 should have at least 125 quality words and the keyword has to be mentioned once.', 0),
-(2, 1, '1 title title title title title5', 'Paragraph 2 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 2 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 2 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 2 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 2 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 2 should have at least 125 quality words and the keyword has to be mentioned once.', 1),
-(3, 1, '2 title title title title title5', 'Paragraph 3 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 3 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 3 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 3 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 3 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 3 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 3 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 3 should have at least 125 quality words and the keyword has to be mentioned once.', 2),
-(4, 1, '3 title title title title title5', 'Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once.Paragraph 4 should have at least 125 quality words and the keyword has to be mentioned once. and more..', 3);
+(1, 1, 'Morbi ac lectus tellus, nec gravida quam', 'Morbi ac lectus tellus, nec gravida quam. Ut felis justo, luctus vitae faucibus vitae, rhoncus nec erat. Nam et ante lobortis sem luctus mattis. Pellentesque dignissim, justo nec auctor mattis, neque erat lobortis nulla, eget consectetur leo purus vel magna. Donec lacinia magna quis dolor luctus vel egestas risus malesuada. Proin volutpat, orci ornare pretium mollis, nunc lorem faucibus libero, vitae vestibulum mauris metus vitae ante. In aliquam, dui euismod commodo ultrices, eros purus mollis eros, ac venenatis ipsum massa id ante. Curabitur rutrum nulla a dolor commodo posuere. Nulla facilisi. Vestibulum id elit a lacus semper semper at ac leo. Ut mollis auctor gravida. In ornare vestibulum ipsum sit amet dictum. Quisque et nulla ipsum.', 0),
+(2, 1, 'Morbi ac lectus tellus, nec gravida quam', 'Morbi ac lectus tellus, nec gravida quam. Ut felis justo, luctus vitae faucibus vitae, rhoncus nec erat. Nam et ante lobortis sem luctus mattis. Pellentesque dignissim, justo nec auctor mattis, neque erat lobortis nulla, eget consectetur leo purus vel magna. Donec lacinia magna quis dolor luctus vel egestas risus malesuada. Proin volutpat, orci ornare pretium mollis, nunc lorem faucibus libero, vitae vestibulum mauris metus vitae ante. In aliquam, dui euismod commodo ultrices, eros purus mollis eros, ac venenatis ipsum massa id ante. Curabitur rutrum nulla a dolor commodo posuere. Nulla facilisi. Vestibulum id elit a lacus semper semper at ac leo. Ut mollis auctor gravida. In ornare vestibulum ipsum sit amet dictum. Quisque et nulla ipsum.', 1),
+(3, 1, 'Morbi ac lectus tellus, nec gravida quam', 'Morbi ac lectus tellus, nec gravida quam. Ut felis justo, luctus vitae faucibus vitae, rhoncus nec erat. Nam et ante lobortis sem luctus mattis. Pellentesque dignissim, justo nec auctor mattis, neque erat lobortis nulla, eget consectetur leo purus vel magna. Donec lacinia magna quis dolor luctus vel egestas risus malesuada. Proin volutpat, orci ornare pretium mollis, nunc lorem faucibus libero, vitae vestibulum mauris metus vitae ante. In aliquam, dui euismod commodo ultrices, eros purus mollis eros, ac venenatis ipsum massa id ante. Curabitur rutrum nulla a dolor commodo posuere. Nulla facilisi. Vestibulum id elit a lacus semper semper at ac leo. Ut mollis auctor gravida. In ornare vestibulum ipsum sit amet dictum. Quisque et nulla ipsum.', 2),
+(4, 1, 'Morbi ac lectus tellus, nec gravida quam', 'Morbi ac lectus tellus, nec gravida quam. Ut felis justo, luctus vitae faucibus vitae, rhoncus nec erat. Nam et ante lobortis sem luctus mattis. Pellentesque dignissim, justo nec auctor mattis, neque erat lobortis nulla, eget consectetur leo purus vel magna. Donec lacinia magna quis dolor luctus vel egestas risus malesuada. Proin volutpat, orci ornare pretium mollis, nunc lorem faucibus libero, vitae vestibulum mauris metus vitae ante. In aliquam, dui euismod commodo ultrices, eros purus mollis eros, ac venenatis ipsum massa id ante. Curabitur rutrum nulla a dolor commodo posuere. Nulla facilisi. Vestibulum id elit a lacus semper semper at ac leo. Ut mollis auctor gravida. In ornare vestibulum ipsum sit amet dictum. Quisque et nulla ipsum.Morbi ac lectus tellus, nec gravida quam. Ut felis justo, luctus vitae faucibus vitae, rhoncus nec erat. Nam et ante lobortis sem luctus mattis. Pellentesque dignissim, justo nec auctor mattis, neque erat lobortis nulla, eget consectetur leo purus vel magna. Donec lacinia magna quis dolor luctus vel egestas risus malesuada. Proin volutpat, orci ornare pretium mollis, nunc lorem faucibus libero, vitae vestibulum mauris metus vitae ante. In aliquam, dui euismod commodo ultrices, eros purus mollis eros, ac venenatis ipsum massa id ante. Curabitur rutrum nulla a dolor commodo posuere. Nulla facilisi. Vestibulum id elit a lacus semper semper at ac leo. Ut mollis auctor gravida. In ornare vestibulum ipsum sit amet dictum. Quisque et nulla ipsum.', 3);
 
 -- --------------------------------------------------------
 
@@ -173,9 +173,9 @@ CREATE TABLE IF NOT EXISTS `instant_payment_notifications` (
 --
 
 INSERT INTO `instant_payment_notifications` (`id`, `notify_version`, `verify_sign`, `test_ipn`, `address_city`, `address_country`, `address_country_code`, `address_name`, `address_state`, `address_status`, `address_street`, `address_zip`, `first_name`, `last_name`, `payer_business_name`, `payer_email`, `payer_id`, `payer_status`, `contact_phone`, `residence_country`, `business`, `item_name`, `item_number`, `quantity`, `receiver_email`, `receiver_id`, `custom`, `invoice`, `memo`, `option_name1`, `option_name2`, `option_selection1`, `option_selection2`, `tax`, `auth_id`, `auth_exp`, `auth_amount`, `auth_status`, `num_cart_items`, `parent_txn_id`, `payment_date`, `payment_status`, `payment_type`, `pending_reason`, `reason_code`, `remaining_settle`, `shipping_method`, `shipping`, `transaction_entity`, `txn_id`, `txn_type`, `exchange_rate`, `mc_currency`, `mc_fee`, `mc_gross`, `mc_handling`, `mc_shipping`, `payment_fee`, `payment_gross`, `settle_amount`, `settle_currency`, `auction_buyer_id`, `auction_closing_date`, `auction_multi_item`, `for_auction`, `subscr_date`, `subscr_effective`, `period1`, `period2`, `period3`, `amount1`, `amount2`, `amount3`, `mc_amount1`, `mc_amount2`, `mc_amount3`, `recurring`, `reattempt`, `retry_at`, `recur_times`, `username`, `password`, `subscr_id`, `case_id`, `case_type`, `case_creation_date`, `created`, `modified`) VALUES
-('4f561f63-573c-4b1a-b1f6-56afd13b92f2', '3.4', 'AZEkDCPyT-9OQ.9V8khMg74eUg60AeBaWktSz-iVDTAf1z3-j9ylTzM4', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'buyerfirstname', 'buyerlastname', 'Business', 'b.test_1331023546_per@gmail.com', 'ECKCJWMTSD8PN', 'unverified', NULL, 'US', 's1_1331026488_biz@gmail.com', 'Order #8 : 21 Articles', 'Order-8', '1', 's1_1331026488_biz@gmail.com', '5ZAFK7S57VPQJ', '', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL, NULL, NULL, '06:29:51 Mar 06, 2012 PST', 'Completed', 'instant', NULL, NULL, NULL, NULL, '0.00', NULL, '0D453268L7474712R', 'web_accept', NULL, 'USD', '3.95', '126.00', NULL, NULL, '3.95', '126.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-06 09:29:55', '2012-03-06 09:29:55'),
-('4f562028-87dc-4f6e-b40a-57b6d13b92f2', '3.4', 'AFcWxV21C7fd0v3bYYYRCpSSRl31ANXpbaj7qPkH4B05KJNFwePdEwjZ', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'buyerfirstname', 'buyerlastname', 'Business', 'b.test_1331023546_per@gmail.com', 'ECKCJWMTSD8PN', 'unverified', NULL, 'US', 's1_1331026488_biz@gmail.com', 'Order #8 : 21 Articles', 'Order-8', '1', 's1_1331026488_biz@gmail.com', '5ZAFK7S57VPQJ', '', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL, NULL, NULL, '06:33:07 Mar 06, 2012 PST', 'Completed', 'instant', NULL, NULL, NULL, NULL, '0.00', NULL, '4LF56522U9654131B', 'web_accept', NULL, 'USD', '3.95', '126.00', NULL, NULL, '3.95', '126.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-06 09:33:12', '2012-03-06 09:33:12'),
-('4f56218e-a224-46e0-b9f0-5939d13b92f2', '3.4', 'AFcWxV21C7fd0v3bYYYRCpSSRl31APmfOFz3d8T.HPJ14HKhNjv2zM1a', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'buyerfirstname', 'buyerlastname', 'Business', 'b.test_1331023546_per@gmail.com', 'ECKCJWMTSD8PN', 'unverified', NULL, 'US', 's1_1331026488_biz@gmail.com', 'Order #8 : 21 Articles', 'Order-8', '1', 's1_1331026488_biz@gmail.com', '5ZAFK7S57VPQJ', '', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL, NULL, NULL, '06:39:03 Mar 06, 2012 PST', 'Completed', 'instant', NULL, NULL, NULL, NULL, '0.00', NULL, '04X33030V6857704J', 'web_accept', NULL, 'USD', '3.95', '126.00', NULL, NULL, '3.95', '126.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-06 09:39:10', '2012-03-06 09:39:10');
+('4f561f63-573c-4b1a-b1f6-56afd13b92f2', '3.4', 'AZEkDCPyT-9OQ.9V8khMg74eUg60AeBaWktSz-iVDTAf1z3-j9ylTzM4', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'buyerfirstname', 'buyerlastname', 'Business', 'b.test_1331023546_per@gmail.com', 'ECKCJWMTSD8PN', 'unverified', NULL, 'US', 's1_1331026488_biz@gmail.com', 'Order #8 : 21 Articles', 'Order-8', '1', 's1_1331026488_biz@gmail.com', '5ZAFK7S57VPQJ', '', NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, '06:29:51 Mar 06, 2012 PST', 'Completed', 'instant', NULL, NULL, NULL, NULL, 0.00, NULL, '0D453268L7474712R', 'web_accept', NULL, 'USD', 3.95, 126.00, NULL, NULL, 3.95, 126.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-06 09:29:55', '2012-03-06 09:29:55'),
+('4f562028-87dc-4f6e-b40a-57b6d13b92f2', '3.4', 'AFcWxV21C7fd0v3bYYYRCpSSRl31ANXpbaj7qPkH4B05KJNFwePdEwjZ', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'buyerfirstname', 'buyerlastname', 'Business', 'b.test_1331023546_per@gmail.com', 'ECKCJWMTSD8PN', 'unverified', NULL, 'US', 's1_1331026488_biz@gmail.com', 'Order #8 : 21 Articles', 'Order-8', '1', 's1_1331026488_biz@gmail.com', '5ZAFK7S57VPQJ', '', NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, '06:33:07 Mar 06, 2012 PST', 'Completed', 'instant', NULL, NULL, NULL, NULL, 0.00, NULL, '4LF56522U9654131B', 'web_accept', NULL, 'USD', 3.95, 126.00, NULL, NULL, 3.95, 126.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-06 09:33:12', '2012-03-06 09:33:12'),
+('4f56218e-a224-46e0-b9f0-5939d13b92f2', '3.4', 'AFcWxV21C7fd0v3bYYYRCpSSRl31APmfOFz3d8T.HPJ14HKhNjv2zM1a', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'buyerfirstname', 'buyerlastname', 'Business', 'b.test_1331023546_per@gmail.com', 'ECKCJWMTSD8PN', 'unverified', NULL, 'US', 's1_1331026488_biz@gmail.com', 'Order #8 : 21 Articles', 'Order-8', '1', 's1_1331026488_biz@gmail.com', '5ZAFK7S57VPQJ', '', NULL, NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, '06:39:03 Mar 06, 2012 PST', 'Completed', 'instant', NULL, NULL, NULL, NULL, 0.00, NULL, '04X33030V6857704J', 'web_accept', NULL, 'USD', 3.95, 126.00, NULL, NULL, 3.95, 126.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-06 09:39:10', '2012-03-06 09:39:10');
 
 -- --------------------------------------------------------
 
@@ -190,50 +190,19 @@ CREATE TABLE IF NOT EXISTS `keywords` (
   `writer_order_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `writer_order_id` (`writer_order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `keywords`
 --
 
 INSERT INTO `keywords` (`id`, `keyword`, `created_date`, `writer_order_id`) VALUES
-(1, 'keyword1', '0000-00-00 00:00:00', 1),
-(2, 'keyword2', '0000-00-00 00:00:00', 1),
-(3, 'keyword3', '0000-00-00 00:00:00', 1),
+(1, 'unique keywords', '0000-00-00 00:00:00', 1),
+(2, 'keyword1', '0000-00-00 00:00:00', 1),
+(3, 'keyword2', '0000-00-00 00:00:00', 1),
 (4, 'keyword1', '0000-00-00 00:00:00', 2),
 (5, 'keyword2', '0000-00-00 00:00:00', 2),
-(6, 'one more keyword', '0000-00-00 00:00:00', 2),
-(7, 'one more and more', '0000-00-00 00:00:00', 2),
-(8, 'keyword6', '0000-00-00 00:00:00', 2),
-(9, 'keyword7', '0000-00-00 00:00:00', 2),
-(10, 'cat', '0000-00-00 00:00:00', 3),
-(11, 'dog', '0000-00-00 00:00:00', 3),
-(12, 'turtle', '0000-00-00 00:00:00', 3),
-(54, 'Lorem ipsum', '0000-00-00 00:00:00', 7),
-(53, 'Lorem ipsum', '0000-00-00 00:00:00', 7),
-(52, 'Lorem ipsum', '0000-00-00 00:00:00', 7),
-(16, 'keyword1', '0000-00-00 00:00:00', 4),
-(17, 'keyword2', '0000-00-00 00:00:00', 4),
-(18, 'one more keyword', '0000-00-00 00:00:00', 4),
-(19, 'one more and more', '0000-00-00 00:00:00', 4),
-(20, 'keyword6', '0000-00-00 00:00:00', 4),
-(21, 'keyword7', '0000-00-00 00:00:00', 4),
-(22, 'keyword11', '0000-00-00 00:00:00', 5),
-(23, 'keyword21', '0000-00-00 00:00:00', 5),
-(24, 'one more keyword1', '0000-00-00 00:00:00', 5),
-(25, 'one more and more1', '0000-00-00 00:00:00', 5),
-(26, 'keyword61', '0000-00-00 00:00:00', 5),
-(27, 'keyword71', '0000-00-00 00:00:00', 5),
-(28, 'keyword1', '0000-00-00 00:00:00', 6),
-(29, 'keyword2', '0000-00-00 00:00:00', 6),
-(30, 'one more keyword', '0000-00-00 00:00:00', 6),
-(31, 'one more and more', '0000-00-00 00:00:00', 6),
-(32, 'keyword6', '0000-00-00 00:00:00', 6),
-(33, 'keyword7', '0000-00-00 00:00:00', 6),
-(34, 'keyword11', '0000-00-00 00:00:00', 5),
-(35, 'keyword21', '0000-00-00 00:00:00', 5),
-(36, 'one more keyword1', '0000-00-00 00:00:00', 5),
-(37, 'keyword101', '0000-00-00 00:00:00', 5);
+(6, 'keyword3', '0000-00-00 00:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -258,21 +227,15 @@ CREATE TABLE IF NOT EXISTS `orders` (
   KEY `status` (`status`),
   KEY `payment_status` (`payment_status`),
   KEY `instant_payment_notification_id` (`instant_payment_notification_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `create_date`, `completed_date`, `articles_count`, `details`, `order_delivery_option_id`, `status`, `payment_status`, `rating`, `instant_payment_notification_id`) VALUES
-(1, 2, '2012-03-01 05:07:35', NULL, 5, 'order details', 1, 'pending', 'pending', 0, NULL),
-(2, 2, '2012-03-02 07:27:20', NULL, 1, 'test keywords box', 1, 'pending', 'pending', 0, NULL),
-(3, 2, '2012-03-02 07:27:20', NULL, 1, 'test keywords box', 1, 'pending', 'pending', 0, NULL),
-(4, 2, '2012-03-02 07:27:20', NULL, 1, 'test keywords box', 1, 'pending', 'pending', 0, NULL),
-(5, 2, '2012-03-02 07:27:20', NULL, 1, 'test keywords box', 1, 'pending', 'pending', 0, NULL),
-(6, 2, '2012-03-02 07:27:20', NULL, 1, 'test keywords box', 1, 'pending', 'pending', 0, NULL),
-(7, 2, '2012-03-02 09:39:36', NULL, 5, 'Lorem ipsum', 1, 'pending', 'pending', 0, NULL),
-(8, 8, '2012-03-06 07:46:33', NULL, 21, 'test articel details,\r\nkeywords', 1, 'pending', 'completed', 0, '4f56218e-a224-46e0-b9f0-5939d13b92f2');
+(1, 2, '2012-03-10 04:22:35', NULL, 10, 'details', 1, 'in_progress', 'completed', 0, NULL),
+(2, 2, '2012-03-10 12:01:16', NULL, 15, 'client order details', 1, 'in_progress', 'completed', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -295,8 +258,8 @@ CREATE TABLE IF NOT EXISTS `order_delivery_options` (
 --
 
 INSERT INTO `order_delivery_options` (`id`, `min_articles`, `max_articles`, `delivery_hours`, `description`, `price_per_article`) VALUES
-(1, 5, 20, 30, '6$ for one 500 words article', '6.00'),
-(2, 5, 100, 80, '5$ for one 500 words article', '5.00');
+(1, 5, 20, 30, '6$ for one 500 words article', 6.00),
+(2, 5, 100, 80, '5$ for one 500 words article', 5.00);
 
 -- --------------------------------------------------------
 
@@ -334,7 +297,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status` enum('active','disabled') NOT NULL DEFAULT 'active',
   `registered_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`,`password`,`status`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
@@ -344,9 +306,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `type`, `username`, `status`, `registered_date`) VALUES
 (1, 'admin@realconnect.mobi', '7a363d7654a1ebbb7550687e4ffa84437cd8f958', 'admin', 'admin', 'active', '2012-02-28 20:37:36'),
-(3, 'manager@realconnect.mobi', '43eaa1d05d779477c8540aba55789775ba6e70e2', 'manager', 'manager', 'active', '2012-02-25 18:18:25'),
+(3, 'manager@aloise.name', 'de320c1593effa44371badc34d832445359f891d', 'manager', 'manager', 'active', '2012-02-25 18:18:25'),
 (2, 'client@aloise.name', 'de320c1593effa44371badc34d832445359f891d', 'client', 'client', 'active', '2012-02-19 17:58:41'),
-(6, 'erwaht@gmail.com', '709ddbabfdf42f7f6dc8d018db5b81c2bacde863', 'writer', 'aloise_writer', 'active', '2012-02-19 13:23:50'),
+(6, 'writer@aloise.name', 'de320c1593effa44371badc34d832445359f891d', 'writer', 'aloise_writer', 'active', '2012-02-19 13:23:50'),
 (7, 'writer2@aloise.name', 'de320c1593effa44371badc34d832445359f891d', 'writer', 'writer2', 'active', '2012-02-28 22:27:59'),
 (8, 'aloise@aloise.name', 'faafa6664cb8e25b10d7a98af3af24c38e51ff50', 'client', 'aloise', 'active', '2012-03-06 07:46:33');
 
@@ -363,15 +325,7 @@ CREATE TABLE IF NOT EXISTS `writer_article_submits` (
   `create_date` datetime NOT NULL,
   `status` enum('submited','declined','accepted','rewrite') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'submited',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `writer_article_submits`
---
-
-INSERT INTO `writer_article_submits` (`id`, `writer_assignment_id`, `manager_notes`, `create_date`, `status`) VALUES
-(2, 3, '', '2012-03-01 05:21:07', 'rewrite'),
-(3, 3, '', '2012-03-01 05:24:03', 'accepted');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -389,15 +343,15 @@ CREATE TABLE IF NOT EXISTS `writer_assignments` (
   `status` enum('pending','in_progress','in_review','completed','rejected') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`id`),
   KEY `writer_user_id` (`writer_user_id`,`manager_user_id`,`writer_order_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `writer_assignments`
 --
 
 INSERT INTO `writer_assignments` (`id`, `writer_user_id`, `manager_user_id`, `writer_order_id`, `create_date`, `completed_date`, `status`) VALUES
-(3, 6, 3, 1, '2012-03-01 05:15:10', '2012-03-01 05:24:36', 'completed'),
-(4, 7, 3, 7, '2012-03-02 09:40:33', NULL, 'pending');
+(1, 6, 3, 1, '2012-03-10 04:29:28', NULL, 'in_progress'),
+(2, 7, 3, 2, '2012-03-10 12:02:43', NULL, 'pending');
 
 -- --------------------------------------------------------
 
@@ -415,17 +369,12 @@ CREATE TABLE IF NOT EXISTS `writer_orders` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`,`user_id`),
   KEY `article_template_id` (`article_template_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `writer_orders`
 --
 
 INSERT INTO `writer_orders` (`id`, `order_id`, `create_date`, `user_id`, `description`, `article_template_id`) VALUES
-(1, 1, '2012-03-01 05:07:35', 3, 'order description', 1),
-(2, 2, '2012-03-02 07:27:20', 3, 'description', 1),
-(3, 3, '2012-03-02 07:27:20', 3, 'description', 1),
-(4, 4, '2012-03-02 07:27:20', 3, 'description', 1),
-(5, 5, '2012-03-02 07:27:20', 3, 'description', 1),
-(6, 6, '2012-03-02 07:27:20', 3, 'description', 1),
-(7, 7, '2012-03-02 09:39:36', 3, 'Lorem ipsum', 1);
+(1, 1, '2012-03-10 04:29:28', 3, 'order details', 1),
+(2, 2, '2012-03-10 12:02:43', 3, 'writer2 description', 1);
