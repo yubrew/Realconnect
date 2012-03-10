@@ -9,7 +9,7 @@
 
 <?php if( $assignments ) { ?>
 
-	<table cellpadding="0" cellspacing="0" style="width: 700px;" class="table table-striped table-bordered table-condensed">
+	<table cellpadding="0" cellspacing="0" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
 		        <th><?php echo $this->Paginator->sort('WriterAssignment.id', 'ID'); ?></th>

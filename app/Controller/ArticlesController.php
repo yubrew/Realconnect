@@ -126,7 +126,6 @@ class ArticlesController extends AppController
 	
 	function writer_edit($writerAssignemnetId)
 	{
-
 		
 		if( !($writerAssignment = $this->WriterAssignment->find('first', array(
 			'conditions' => array(

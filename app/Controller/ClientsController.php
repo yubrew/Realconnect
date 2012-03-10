@@ -23,6 +23,8 @@ class ClientsController extends AppController
 		if($this->request->is('post'))
 		{
 			unset($this->User->validate['email']['unique']);
+			unset($this->User->validate['username']['unique']);
+			
 			$this->User->create($this->request->data);
 			$this->Order->create($this->request->data);
 				
@@ -47,16 +49,22 @@ class ClientsController extends AppController
 						$this->User->save();
 						$existingUser = $this->User->read();
 					}
+					
+					var_dump($existingUser);
+					
+					$this->Order->data['Order'] = am( $this->Order->data['Order'], array(
+						'user_id' 		=> $existingUser['User']['id'],
+						'create_date'	=> date('Y-m-d H:i:s')
+					));
+					
+					$this->Order->save();
+					
+					$this->redirect('/orders/pay/'.$this->Order->id);					
+					
+					
 				}
 				
-				$this->Order->data['Order'] = am( $this->Order->data['Order'], array(
-					'user_id' 		=> $existingUser['User']['id'],
-					'create_date'	=> date('Y-m-d H:i:s')
-				));
-				
-				$this->Order->save();
-				
-				$this->redirect('/orders/pay/'.$this->Order->id);
+
 
 				
 			}
