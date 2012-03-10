@@ -92,7 +92,8 @@ class UsersController extends AppController
 					'pending', 
 					'in_progress',
 					'in_review'
-				)
+				),
+				'WriterAssignment.writer_user_id' => $this->user['User']['id']
 			),
 			'limit'	=>	20,
 			'recursive' => 3

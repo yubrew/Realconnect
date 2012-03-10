@@ -140,7 +140,7 @@ $(function(){
 
 <div class="well">
 
-	<h1>Order #<?php echo $writerAssignment['WriterOrder']['id'] ?>
+	<h1>Article #<?php echo $writerAssignment['WriterOrder']['id'] ?>
 	
 	<span style="position:relative; top:-7px;">
 	<?php if($writerAssignment['WriterAssignment']['status'] == 'pending'){ ?>
