@@ -47,7 +47,8 @@ class AppController extends Controller {
 						'username' => 'email'
 					),
 	                'scope'	=> array(
-	                	'User.status'	=> 'active'
+	                	'User.status'	=> 'active',
+	                	'User.type <>'	=> 'client'
 	                )
 	            )
 	        ),
@@ -76,12 +77,15 @@ class AppController extends Controller {
 		$this->user = $userData ? array('User' => $userData) : false;
 		$this->set('user', $this->user );
 		
+		
 		if( $this->user && !empty($this->request->params['prefix']))
 		{
 			if($this->user['User']['type']!=$this->request->params['prefix'])
 			{
 				throw new CakeException($this->request->params['prefix'] .' access permission is required ');
 			}
+			
+			
 		}
 		// if( $this->request)
 

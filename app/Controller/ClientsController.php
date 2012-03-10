@@ -50,7 +50,7 @@ class ClientsController extends AppController
 						$existingUser = $this->User->read();
 					}
 					
-					var_dump($existingUser);
+					
 					
 					$this->Order->data['Order'] = am( $this->Order->data['Order'], array(
 						'user_id' 		=> $existingUser['User']['id'],
