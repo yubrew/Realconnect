@@ -20,12 +20,19 @@ class OrdersController extends AppController
 		$this->Auth->allow('pay', 'paypal_ipn','payment_return');
 	}
 	
-	function admin_list()
+	function admin_list( $status = 'all')
 	{
 		$this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
 		
+		$conditions = array();
+		
+		if($status != 'all')
+		{
+			$conditions['Order.status'] = $status;
+		}
+		
 		$this->paginate	= array(
-			'conditions' 	=>	array(),
+			'conditions' 	=>	$conditions,
 			'limit'			=>	20,
 			'recursive' 	=> 3
 		);
@@ -33,7 +40,7 @@ class OrdersController extends AppController
     	$orders =	$this->paginate('Order');		
 		
 		$this->set('orders', $orders);		
-		
+		$this->set('status', $status);
 				
 	}
 	
@@ -54,12 +61,15 @@ class OrdersController extends AppController
 			$keywordDataInitial = empty($this->request->data['WriterOrder']['Keyword']) ? array(): $this->request->data['WriterOrder']['Keyword'];
 			$keywordIndex = 0;
 			 
-			 
-			 
 			if(!empty($this->request->data['WriterOrder']['keywords']))
 			{
-				$this->request->data['WriterOrder']['Keyword'] = $this->Keyword->unpackKeywords($this->request->data['WriterOrder']['keywords']);
+				$this->request->data['WriterOrder']['Keyword'] = $this->Keyword->unpackKeywords($this->request->data['WriterOrder']['keywords'], $keywordDataInitial);
+				
+				$keywordIndex = count($this->request->data['WriterOrder']['Keyword']);
 			}
+			
+			
+			
 		
 		    if ($this->Order->saveAssociated($this->request->data, array('validate' => 'first', 'deep' => true))) 
 		    {
@@ -265,6 +275,10 @@ class OrdersController extends AppController
 					'status'	=> 'in_progress'
 				), false);
 				
+				
+				// notify a writer
+				$this->newAssignmentNotification($this->WriterOrder->WriterAssignment->id);
+				
 				$this->Session->setFlash( __('Assignment was created successfully'));     
 		        
 		        $this->redirect('/manager/orders/view/'.$orderId);
@@ -278,9 +292,11 @@ class OrdersController extends AppController
 			
 		}		
 		
+		$existingAssignments = $this->WriterAssignment->find('all', array( 'conditions' => array('WriterOrder.order_id' => $orderId ), 'recursive' => 0 ) );
 		
 		
-		$this->set(compact('order', 'writers', 'articleTemplates', 'exisitngAssignmentsCount'));
+		
+		$this->set(compact('order', 'writers', 'articleTemplates', 'exisitngAssignmentsCount', 'existingAssignments'));
 	}
 	
 	protected function newAssignmentNotification($writerAssignmentId)
@@ -289,7 +305,6 @@ class OrdersController extends AppController
 		
 		if( $writerAssignment = $this->WriterAssignment->read(null, $writerAssignmentId) )
 		{
-			
 			try
 			{
 				// email the manager

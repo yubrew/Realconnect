@@ -139,6 +139,8 @@ $(function(){
 
 	<h1>Order #<?php echo $writerAssignment['WriterOrder']['id'] ?>
 	
+
+	
 	<span style="position:relative; top:-7px;">
 	<?php if($writerAssignment['WriterAssignment']['status'] == 'pending'){ ?>
 		<span class="label"><?php echo __('In Progress') ?></span>
@@ -154,6 +156,10 @@ $(function(){
 	</span>
 
 	</h1>
+	
+	<?php if($writerAssignment['WriterAssignment']['status'] == 'completed'){ ?>
+	<p><?php echo $this->Html->link( __('Export'), '/articles/export/'.$writerAssignment['WriterAssignment']['id']) ?></p>
+	<?php } ?>		
 
 	<?php if(!empty($writerAssignment['WriterOrder']['Keyword'])){ ?>
 	

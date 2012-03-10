@@ -12,7 +12,9 @@ class WriterOrder extends AppModel
 	);
 	
 	public $hasMany = array(
-		'Keyword'
+		'Keyword' => array(
+			'order' => 'Keyword.id ASC'
+		)
 	);
 	
 	public $validate = array(

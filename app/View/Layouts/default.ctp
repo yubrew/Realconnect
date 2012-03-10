@@ -94,7 +94,7 @@
             
             <ul class="nav pull-right">
               <?php if( !empty($user) ){ ?>
-              		<li style="font-weight:bold"><?php echo $this->Html->link($user['User']['username'], '/users/profile') ?></li>
+              		<li style="font-weight:bold" class="<?php echo ( $activeTopMenuItem == '/users/profile' ) ? 'active' : '' ?>"><?php echo $this->Html->link($user['User']['username'], '/users/profile') ?></li>
               		<li><?php echo $this->Html->link('Logout', '/users/logout'); ?></li> 
               <?php } else { ?>
               		<li><?php echo $this->Html->link('Login', '/users/login'); ?></li>

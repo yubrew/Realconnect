@@ -86,7 +86,6 @@ class UsersController extends AppController
 	
 	public function writer_dashboard() 
 	{
-		
 		$this->paginate	=	array(
 			'conditions'	=>	array(
 				'WriterAssignment.status' => array(
@@ -139,8 +138,15 @@ class UsersController extends AppController
 		$this->set('users', $users);			
 	}
 	
-	public function profile()
+	public function profile( $id = null )
 	{
+		$id = $id ? $id : $this->user['User']['id'];
 		
+		if( !($userData = $this->User->read(null, $id)) )
+		{
+			throw new CakeException();
+		};
+		
+		$this->set('userData', $userData);
 	}
 }

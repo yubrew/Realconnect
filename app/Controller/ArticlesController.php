@@ -281,17 +281,26 @@ class ArticlesController extends AppController
 		
 	}
 	
-	public function admin_list()
+	public function admin_list( $status = 'all' )
 	{
+		
+		$conditions = array();
+		
+		if($status != 'all')
+		{
+			$conditions['WriterAssignment.status'] = $status;
+		}
+		
 		$this->paginate	= array(
-			'conditions' =>	array(),
+			'conditions' =>	$conditions,
 			'limit'	=>	20,
 			'recursive' => 3
 		);
 		
     	$assignments = $this->paginate('WriterAssignment');		
 		
-		$this->set('assignments', $assignments);			
+		$this->set('assignments', $assignments);	
+		$this->set('status', $status);		
 	}
 	
 	public function admin_add()

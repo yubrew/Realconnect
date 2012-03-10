@@ -42,9 +42,22 @@ $(function(){
 	<p><b>Delivery</b>: <?php echo $order['OrderDeliveryOption']['delivery_hours'].'h , '. $order['OrderDeliveryOption']['description'] ?>
 	<p><b>Details</b>:<br /> <?php echo nl2br(h($order['Order']['details'])) ?></p>
 	<p><b>Existing Assignments</b> ( total / in progress / completed ) : <?php echo $exisitngAssignmentsCount['total'].' / '.$exisitngAssignmentsCount['in_progress'].' / '.$exisitngAssignmentsCount['completed'] ?></p>
+	<?php if($existingAssignments){ ?>
+	<p>
+		<?php foreach($existingAssignments as $existingAssignment){ 
+			$label = '#'.$existingAssignment['WriterAssignment']['id'].' assigned to '.$existingAssignment['Writer']['username']; 
+		?>
+		<li>
+			<?php echo $this->Html->link( $label, '/manager/articles/review/'.$existingAssignment['WriterAssignment']['id']) ?> -
+			<?php echo ( $existingAssignment['WriterAssignment']['status'] != 'completed' ) ? '' : $this->Html->link( __('Export'), '/articles/export/'.$existingAssignment['WriterAssignment']['id']).' - '; ?>  
+			<?php echo Inflector::humanize($existingAssignment['WriterAssignment']['status']) ?></li>
+		<?php } ?>
+	</p>
+	<?php } ?>
+	
 </div>
 
-
+<?php if($order['Order']['status'] != 'completed'){ ?>
 
 <div>
 	<h2><?php echo __('Add a Writer Assignment') ?></h2>
@@ -135,3 +148,5 @@ $(function(){
 	</div>		
 	<?php echo $this->Form->end() ?>	
 </div>
+
+<?php } ?>

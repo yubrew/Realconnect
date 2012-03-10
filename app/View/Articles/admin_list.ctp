@@ -8,6 +8,15 @@
 
 <br />
 
+<div class="btn-group" style="margin-bottom: 1em">
+  <?php 
+  $statuses = array( 'all' => _('All'), 'pending' => __('Pending'), 'in_progress' => __('In progress'), 'completed' => __('Completed'));
+  foreach($statuses as $k => $statusName )
+  {
+		echo $this->Html->link( $statusName, '/admin/articles/list/'. $k , array('class' => 'btn' , 'disabled' => ( ( $status == $k ) ? 'disabled' : false ) ) );
+  }
+  ?>
+</div>
 
 <?php if( $assignments ) { ?>
 

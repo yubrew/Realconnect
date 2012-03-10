@@ -152,8 +152,14 @@ $(function(){
 		)); ?>
 </div>	
 
-<?php foreach($this->data['WriterOrder']['Keyword'] as $i => $kw ){
-	echo $this->Form->hidden('WriterOrder.Keyword.'.$i.'.id');
+<?php 
+if(!empty($this->data['WriterOrder']['Keyword']))
+{
+
+	foreach($this->data['WriterOrder']['Keyword'] as $i => $kw )
+	{
+		echo $this->Form->hidden('WriterOrder.Keyword.'.$i.'.id');
+	}
 }
 ?>
 

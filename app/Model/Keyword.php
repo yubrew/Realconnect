@@ -11,7 +11,7 @@ class Keyword extends AppModel
 	);
 	
 	
-	public function unpackKeywords($keywordsData)
+	public function unpackKeywords($keywordsData, $keywordDataInitial = array())
 	{
 		
 		$keywordsArray = explode("\n", $keywordsData);
@@ -42,7 +42,6 @@ class Keyword extends AppModel
 				$keywordIndex++;
 			}
 		}
-		
 
 		return $keywordDataArray ? $keywordDataArray : array() ;
 		

@@ -33,7 +33,10 @@
 			
 			$assignmentStartTimestamp = strtotime($a['WriterAssignment']['create_date']);
 			$secondsFromStart = $now - $assignmentStartTimestamp;
-			$orderDeliverySeconds = $a['WriterOrder']['Order']['OrderDeliveryOption']['delivery_hours'] * 3600 ;// seconds
+			
+			
+			
+			$orderDeliverySeconds = empty($a['WriterOrder']['Order']['OrderDeliveryOption']) ? 0 : $a['WriterOrder']['Order']['OrderDeliveryOption']['delivery_hours'] * 3600 ;// seconds
 			
 			$secondsLeft = $orderDeliverySeconds - $secondsFromStart;
 				
@@ -45,9 +48,9 @@
 		        <td><?php echo h($a['WriterAssignment']['status']); ?></td>
 		        
 		        <td><?php echo h($a['Writer']['username']); ?></td>
-		        <td><?php echo h($a['WriterOrder']['Order']['id']); ?> </td>
+		        <td><?php echo empty($a['WriterOrder']['Order']['id']) ? '' : h($a['WriterOrder']['Order']['id']); ?> </td>
 		        <td><?php $keywords = Set::extract( '/WriterOrder/Keyword/keyword', $a ); echo join(', ',$keywords); ?></td>
-		        <td><span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo  round($secondsLeft/3600) ?>h</span></td>
+		        <td><span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo empty($a['WriterOrder']['Order']['id']) ? '' : (round($secondsLeft/3600)).'h' ?></span></td>
 		        <td>
 		        	<?php echo $this->Html->link(__('Review'), '/manager/articles/review/'.$a['WriterAssignment']['id'], null); ?>
 		        	<?php if(!empty($a['Article']['id'])) { ?>

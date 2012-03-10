@@ -10,6 +10,17 @@
 <ul class="nav nav-pills">
 	<li><?php echo $this->Html->link( __('Create an Order' ), '/admin/orders/add') ?></li>
 </ul>
+<br />
+
+<div class="btn-group" style="margin-bottom: 1em">
+  <?php 
+  $statuses = array( 'all' => __('All'), 'pending' => __('Pending'), 'in_progress' => __('In progress'), 'completed' => __('Completed'));
+  foreach($statuses as $k => $statusName )
+  {
+		echo $this->Html->link( $statusName, '/admin/orders/list/'. $k , array('class' => 'btn' , 'disabled' => ( ( $status == $k ) ? 'disabled' : false ) ) );
+  }
+  ?>
+</div>
 
 <?php if( $orders ) { ?>
 
