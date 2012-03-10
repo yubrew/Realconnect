@@ -41,7 +41,7 @@ $(function(){
 	<p><b>Hours left</b>: <span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo  round($secondsLeft/3600) ?>h</span></p>
 	<p><b>Delivery</b>: <?php echo $order['OrderDeliveryOption']['delivery_hours'].'h , '. $order['OrderDeliveryOption']['description'] ?>
 	<p><b>Details</b>:<br /> <?php echo nl2br(h($order['Order']['details'])) ?></p>
-	<p><b>Existing Assignments</b> ( total / in progress / completed ) : <?php echo $exisitngAssignmentsCount['total'].' / '.$exisitngAssignmentsCount['in_progress'].' / '.$exisitngAssignmentsCount['completed'] ?></p>
+	<p><b>Existing Assignments</b> ( requested / assigned / in progress / completed ) : <?php echo '<b>'.$order['Order']['articles_count'].'</b> / '.$exisitngAssignmentsCount['total'].' / '.$exisitngAssignmentsCount['in_progress'].' / '.$exisitngAssignmentsCount['completed'] ?></p>
 	<?php if($existingAssignments){ ?>
 	<p>
 		<?php foreach($existingAssignments as $existingAssignment){ 
