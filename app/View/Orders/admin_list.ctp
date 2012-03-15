@@ -31,7 +31,7 @@
 		        <th><?php echo  __('status'); ?></th>
 		        <th><?php echo $this->Paginator->sort('ArticleTemplate.name', __('article template')); ?></th>
 		        <th><?php echo $this->Paginator->sort('Client.username', __('client')); ?></th>
-		        
+		        <th><?php echo $this->Paginator->sort('Order.payment_status', __('paid ?')); ?></th>
 		        <th><?php echo __('actions') ?></th>
 		    </tr>
 		</thead>
@@ -49,6 +49,7 @@
 		        <td><?php echo $order['Order']['completed_articles_count'].'/'.$order['Order']['articles_count']. __(' completed') ?></td>
 		        <td><?php echo h( $order['ArticleTemplate']['name']); ?></td>
 		        <td><?php echo $this->Html->link($order['Client']['username'], '/admin/users/edit/'.$order['Client']['id']); ?></td>
+		        <td><?php echo $order['Order']['payment_status'] == 'completed' ? 'y' : 'n' ?></td>
 		        <td>
 		        	<?php echo $this->Html->link(__('Edit'), '/admin/orders/edit/'.$order['Order']['id']); ?> | 
 		        	<?php echo $this->Html->link(__('View Assignments'), '/admin/articles/list_by_order/'.$order['Order']['id']); ?> <!-- |

@@ -39,6 +39,7 @@ $(function(){
 		        <th><?php echo  __('status'); ?></th>
 		        <th><?php echo $this->Paginator->sort('ArticleTemplate.name', __('article template')); ?></th>
 		        <th><?php echo $this->Paginator->sort('Client.username', __('client')); ?></th>
+		        
 		        <th><?php echo __('hours left') ?></th>
 		        <th><?php echo __('actions') ?></th>			
 			
