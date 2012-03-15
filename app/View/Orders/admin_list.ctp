@@ -32,7 +32,7 @@
 		        <th><?php echo $this->Paginator->sort('Order.status', __('Status')); ?></th>
 		        <th><?php echo $this->Paginator->sort('OrderDeliveryOption.description', __('Delivery')); ?></th>
 		        <th><?php echo $this->Paginator->sort('Client.username', __('Client')); ?></th>
-		        <th><?php echo __('Manager'); ?></th>
+		        
 		        <th><?php echo __('Actions') ?></th>
 		    </tr>
 		</thead>
@@ -50,7 +50,6 @@
 		        <td><?php echo h($order['Order']['status']); ?></td>
 		        <td><?php echo h( $order['OrderDeliveryOption']['description']); ?></td>
 		        <td><?php echo $this->Html->link($order['Client']['username'], '/admin/users/edit/'.$order['Client']['id']); ?></td>
-		        <td><?php echo empty($order['WriterOrder']['Manager']['id']) ? '' : $this->Html->link($order['WriterOrder']['Manager']['username'], '/admin/users/edit/'.$order['WriterOrder']['Manager']['id']); ?></td>
 		        <td>
 		        	<?php echo $this->Html->link(__('Edit'), '/admin/orders/edit/'.$order['Order']['id']); ?> | 
 		        	<?php echo $this->Html->link(__('View Assignments'), '/admin/articles/list_by_order/'.$order['Order']['id']); ?> |

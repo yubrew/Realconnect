@@ -22,7 +22,7 @@ class OrdersController extends AppController
 	
 	function admin_list( $status = 'all')
 	{
-		$this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
+		// $this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
 		
 		$conditions = array();
 		

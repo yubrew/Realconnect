@@ -37,6 +37,7 @@ $(function(){
 	echo $this->Form->hidden('WriterOrder.create_date', array('value' => date('Y-m-d H:i:s')));
 	echo $this->Form->hidden('Order.create_date', array('value' => date('Y-m-d H:i:s')));
 	echo $this->Form->hidden('Order.id');
+	echo $this->Form->hidden('Order.payment_status', array('value' => 'completed'));
 	echo $this->Form->hidden('WriterOrder.id');
 ?>
 
