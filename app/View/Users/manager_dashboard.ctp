@@ -4,6 +4,14 @@
 <?php
 	$this->Paginator->options(array('url' => array('controller' => 'manager', 'action' => 'dashboard') ));
 	$pagesParams	=	$this->Paginator->params();
+
+	$assignmentStatuses = array(
+		'pending' 		=> __('writing'),
+		'in_progress'	=> __('writing'),
+		'in_review'		=> __('under review'),
+		'completed'		=> __('complete')
+	);	
+	
 ?>
 
 <br />
@@ -13,15 +21,21 @@
 	<table cellpadding="0" cellspacing="0" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-		        <th><?php echo $this->Paginator->sort('WriterAssignment.id', 'ID'); ?></th>
+		        <th><?php echo $this->Paginator->sort('WriterAssignment.id', __('assignment id')); ?></th>
+		        <th><?php echo __('order id'); ?></th>
+		        <th><?php echo $this->Paginator->sort('WriterAssignment.create_date', __('date')); ?></th>
 		        
-		        <th><?php echo $this->Paginator->sort('WriterAssignment.create_date', __('Date')); ?></th>
-		        <th><?php echo $this->Paginator->sort('WriterAssignment.status', __('Status')); ?></th>
-		        <th><?php echo $this->Paginator->sort('Writer.username', __('Writer')); ?></th>
-		        <th><?php echo  __('Order ID'); ?></th>
-		        <th><?php echo __('Keywords') ?></th>
-		        <th><?php echo __('Hours left') ?></th>
-		        <th><?php echo __('Actions') ?></th>
+		        
+		        <th><?php echo __('hours left') ?></th>
+		        <th><?php echo __('keywords') ?></th>
+		        <th><?php echo $this->Paginator->sort('WriterAssignment.status', __('status')); ?></th>
+		        <th><?php echo $this->Paginator->sort('Writer.username', __('writer')); ?></th>
+		        <th><?php echo __('article template') ?></th>
+		        <th><?php echo  __('client'); ?></th>
+		        <th><?php echo $this->Paginator->sort('Manager.username', __('manager')); ?></th>
+		        
+		        
+		        <th><?php echo __('actions') ?></th>
 		    </tr>
 		</thead>
 		<tbody>
@@ -42,22 +56,31 @@
 				
 			?>
 		    <tr>
-		        <td><?php echo h($a['WriterAssignment']['id']); ?> </td>
-		        
-		        <td><?php echo date( 'm/d/y', $assignmentStartTimestamp); ?> </td>
-		        <td><?php echo h($a['WriterAssignment']['status']); ?></td>
-		        
-		        <td><?php echo h($a['Writer']['username']); ?></td>
-		        <td><?php echo empty($a['WriterOrder']['Order']['id']) ? '' : h($a['WriterOrder']['Order']['id']); ?> </td>
+		    
+		    	<td><?php echo h($a['WriterAssignment']['id']); ?></td>
+		    	<td><?php echo h($a['WriterOrder']['Order']['id']); ?></td>
+		        <td><?php echo date( 'm/d/y H:i:s', $assignmentStartTimestamp); ?> </td>
+		        <td><span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo  round($secondsLeft/3600) ?>h</span></td>
 		        <td><?php $keywords = Set::extract( '/WriterOrder/Keyword/keyword', $a ); echo join(', ',$keywords); ?></td>
-		        <td><span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo empty($a['WriterOrder']['Order']['id']) ? '' : (round($secondsLeft/3600)).'h' ?></span></td>
+		        
+		        <td><?php echo h( $assignmentStatuses[ $a['WriterAssignment']['status'] ]); ?></td>
+		        <td><?php echo h($a['Writer']['username']); ?></td>
+		        <td><?php echo h($a['WriterOrder']['Order']['ArticleTemplate']['name']) ?></td>
+		        <td><?php echo h($a['WriterOrder']['Order']['Client']['username'] ); ?></td>
+		        <td><?php echo h( $a['Manager']['username']); ?></td>
+		        
+		        
 		        <td>
 		        	<?php echo $this->Html->link(__('Review'), '/manager/articles/review/'.$a['WriterAssignment']['id'], null); ?>
 		        	<?php if(!empty($a['Article']['id'])) { ?>
 		        	  
 		        	| <?php echo $this->Html->link(__('Export'), '/articles/export/'.$a['WriterAssignment']['id'], null); ?>
 		        	<?php } ?>
-				</td>
+				</td>		    
+		    
+		    
+		    
+
 		    </tr>
 		    <?php } ?>
 	    </tbody>

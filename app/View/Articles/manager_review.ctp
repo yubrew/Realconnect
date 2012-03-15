@@ -277,7 +277,7 @@ $(function(){
 </div>	
 			
 
-	<?php if($this->data['WriterArticleSubmit']['id']){ ?>
+	<?php if( !empty($this->data['WriterArticleSubmit']['id'])){ ?>
 	
 	<?php echo $this->Form->hidden('WriterArticleSubmit.id') ?>
 	
