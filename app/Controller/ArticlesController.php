@@ -11,7 +11,7 @@ class ArticlesController extends AppController
 	);
 	
 	
-	function manager_review( $writerAssignemnetId, $writerArticleSubmitId = null )
+	public function manager_review( $writerAssignemnetId, $writerArticleSubmitId = null )
 	{
 		$writerArticleSubmits = array();
 		
@@ -21,12 +21,17 @@ class ArticlesController extends AppController
 		}
 		
 		$this->WriterAssignment->bindModel(array('hasMany' => array('WriterArticleSubmit' => $writerArticleSubmits)));
+		$conditions = array(
+				'WriterAssignment.id' => $writerAssignemnetId
+		);
+		
+		if($this->user['User']['type'] != 'admin')
+		{
+			$conditions['WriterAssignment.manager_user_id'] = $this->user['User']['id'];
+		}
 		
 		if( !($writerAssignment = $this->WriterAssignment->find('first', array(
-			'conditions' => array(
-				'WriterAssignment.manager_user_id' => $this->user['User']['id'],
-				'WriterAssignment.id' => $writerAssignemnetId
-			),
+			'conditions' => $conditions,
 			'recursive' => 3
 		))))
 		{
@@ -124,6 +129,13 @@ class ArticlesController extends AppController
 		$this->set('writerAssignment', $writerAssignment);
 		
 		// $this->render('writer_edit');
+	}
+	
+	public function admin_review($writerAssignmentId)
+	{
+		$this->manager_review($writerAssignmentId);
+		
+		$this->render('manager_review');
 	}
 	
 	function writer_edit($writerAssignemnetId)

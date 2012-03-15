@@ -52,8 +52,9 @@
 		        <td><?php echo $this->Html->link($order['Client']['username'], '/admin/users/edit/'.$order['Client']['id']); ?></td>
 		        <td>
 		        	<?php echo $this->Html->link(__('Edit'), '/admin/orders/edit/'.$order['Order']['id']); ?> | 
-		        	<?php echo $this->Html->link(__('View Assignments'), '/admin/articles/list_by_order/'.$order['Order']['id']); ?> |
+		        	<?php echo $this->Html->link(__('View Assignments'), '/admin/articles/list_by_order/'.$order['Order']['id']); ?> <!-- |
 		        	<?php echo $this->Html->link(__('Assign to writer'), '/admin/orders/assign/'.$order['Order']['id'] ); ?>
+		        	-->
 				</td>
 		    </tr>
 		    <?php } ?>

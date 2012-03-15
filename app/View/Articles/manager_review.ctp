@@ -39,7 +39,7 @@ $progressPercent = $wordsTotal > 0 ?  min(100, 100*$wordsCount/$wordsTotal ) : 0
 
 $updateAllowed = false;
 
-$updateAllowed = in_array( $writerAssignment['WriterAssignment']['status'], array( 'pending','in_progress','in_review' ) );
+$updateAllowed = ( $user['User']['type'] == 'manager' ) && in_array( $writerAssignment['WriterAssignment']['status'], array( 'pending','in_progress','in_review' ) );
 
 
 ?>
@@ -330,7 +330,8 @@ $(function(){
 		
 		<?php } ?>
 	
-		<?php echo $this->Html->link('Back to list', '/manager/dashboard', array('class' => 'btn')); ?>
+		
+		<?php echo $this->Html->link('Back to list',  ( $user['User']['type'] == 'manager') ? '/manager/dashboard' : '/admin/articles/list' , array('class' => 'btn')); ?>
 	</div>		
 	<?php echo $this->Form->end() ?>
 

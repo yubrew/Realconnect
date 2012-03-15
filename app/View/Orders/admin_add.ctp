@@ -34,11 +34,11 @@ $(function(){
 
 <?php 
 	echo $this->Form->create('Order', array('type' => 'post', 'class' => 'form-horizontal article-edit'));
-	echo $this->Form->hidden('WriterOrder.create_date', array('value' => date('Y-m-d H:i:s')));
+	// echo $this->Form->hidden('WriterOrder.create_date', array('value' => date('Y-m-d H:i:s')));
 	echo $this->Form->hidden('Order.create_date', array('value' => date('Y-m-d H:i:s')));
 	echo $this->Form->hidden('Order.id');
 	echo $this->Form->hidden('Order.payment_status', array('value' => 'completed'));
-	echo $this->Form->hidden('WriterOrder.id');
+	// echo $this->Form->hidden('WriterOrder.id');
 ?>
 
 	<div class="control-group">
@@ -85,7 +85,7 @@ $(function(){
 		<label class="control-label" for="OrderOrderDeliveryOptionId"><?php echo __('Delivery options') ?></label>
 		<div class="controls">
 		<?php
-				echo $this->Form->select('order_delivery_option_id', $deliveryOptions,
+				echo $this->Form->select('Order.order_delivery_option_id', $deliveryOptions,
 														array(
 															'label'	=>	false,
 															'empty'	=>	false,
@@ -95,6 +95,8 @@ $(function(){
 		</div>
 	</div>
 
+
+<?php /*
 	<div class="control-group">
 		<label class="control-label" for="WriterOrderUserId"><?php echo __('Manager') ?></label>
 		<div class="controls">
@@ -142,7 +144,7 @@ $(function(){
 
 <?php $errorMessageForField	=	( $f = $this->Form->error('WriterOrder.keywords', array('empty' => __('Field is invalid' ) ) ) ) ? $f : false; ?>
 <div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
-		<label class="control-label" for="WriterOrderDescription"><?php echo __('Keywords, one per line') ?></label>
+		<label class="control-label" for="WriterOrderKeywrds"><?php echo __('Keywords, one per line') ?></label>
 		<?php echo $this->Form->input('WriterOrder.keywords', array(
 			'label'	=>	false,
 			'class'	=>	'input-xxlarge',
@@ -153,25 +155,7 @@ $(function(){
 		)); ?>
 </div>
 
-<?php /*
 
-<?php for($i=0; $i<10; $i++){ $fieldName = 'WriterOrder.Keyword.'.$i.'.keyword'; ?>
-	<?php echo $this->Form->hidden('WriterOrder.Keyword.'.$i.'.create_date', array('value' => date('Y-m-d H:i:s'))) ?>
-	<?php $errorMessageForField	=( $f = $this->Form->error($fieldName, array('empty' => __('Field is empty' ) ) ) ) ? $f : false; ?>
-	<div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
-			<label class="control-label" for="WriterOrderKeyword<?php echo $i ?>Keyword"><?php echo __('Keyword') ?></label>
-			<?php echo $this->Form->input($fieldName, array(
-				'label'	=>	false,
-				'class'	=>	'input-xlarge',
-				'div'	=>	array("class" => "controls"),
-				'after'	=>	( $errorMessageForField ? '<span class="help-inline">'.$errorMessageForField.'</span>' : '' ),
-				'error'	=>	false,
-				'type'	=> 'text'
-			)); 
-			?>
-			
-	</div>
-<?php } ?>
 
 */ ?>
 

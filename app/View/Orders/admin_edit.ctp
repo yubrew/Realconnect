@@ -35,7 +35,7 @@ $(function(){
 <?php 
 	echo $this->Form->create('Order', array('type' => 'post', 'class' => 'form-horizontal article-edit'));
 	echo $this->Form->hidden('Order.id');
-	echo $this->Form->hidden('WriterOrder.id');
+	// echo $this->Form->hidden('WriterOrder.id');
 ?>
 
 <div class="control-group">
@@ -93,6 +93,7 @@ $(function(){
 		</div>
 	</div>
 
+<?php /*
 	<div class="control-group">
 		<label class="control-label" for="WriterOrderUserId"><?php echo __('Manager') ?></label>
 		<div class="controls">
@@ -141,7 +142,7 @@ $(function(){
 
 <?php $errorMessageForField	=	( $f = $this->Form->error('WriterOrder.keywords', array('empty' => __('Field is invalid' ) ) ) ) ? $f : false; ?>
 <div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
-		<label class="control-label" for="WriterOrderDescription"><?php echo __('Manager Order description') ?></label>
+		<label class="control-label" for="WriterOrderKeywords"><?php echo __('Manager Order description') ?></label>
 		<?php echo $this->Form->input('WriterOrder.keywords', array(
 			'label'	=>	false,
 			'class'	=>	'input-xxlarge',
@@ -163,24 +164,7 @@ if(!empty($this->data['WriterOrder']['Keyword']))
 }
 ?>
 
-<?php /*
-<?php for($i=0; $i<10; $i++){ $fieldName = 'WriterOrder.Keyword.'.$i.'.keyword'; ?>
-	<?php echo $this->Form->hidden('WriterOrder.Keyword.'.$i.'.id') ?>
-	<?php $errorMessageForField	=( $f = $this->Form->error($fieldName, array('empty' => __('Field is empty' ) ) ) ) ? $f : false; ?>
-	<div class="control-group <?php echo $errorMessageForField ? "error" : ""; ?>">
-			<label class="control-label" for="WriterOrderKeyword<?php echo $i ?>Keyword"><?php echo __('Keyword') ?></label>
-			<?php echo $this->Form->input($fieldName, array(
-				'label'	=>	false,
-				'class'	=>	'input-xlarge',
-				'div'	=>	array("class" => "controls"),
-				'after'	=>	( $errorMessageForField ? '<span class="help-inline">'.$errorMessageForField.'</span>' : '' ),
-				'error'	=>	false,
-				'type'	=> 'text'
-			)); 
-			?>
-			
-	</div>
-<?php } ?>
+
 
 */ ?>
 

@@ -51,7 +51,7 @@ class OrdersController extends AppController
 	
 	public function admin_edit($id)
 	{
-		$this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
+		// $this->Order->bindModel(array( 'hasOne' => array( 'WriterOrder' ) ), false);
 		
 		$orderData = $id ? $this->Order->find('first', array('conditions' => array('Order.id' => $id), 'recursive' => 2)) : null;
 		
@@ -88,12 +88,7 @@ class OrdersController extends AppController
 				
 				$this->Session->setFlash( $id ? __('Saved successfully') : __('Order created successfully'));     
 		        
-		        /*
-		        if( !$keywordIndexd )
-		        {
-		        	$this->newOrderNotification($this->Order->id);
-		        }
-		        */
+
 		        
 		        $this->redirect('/admin/orders/edit/'.$this->Order->id);
 		    }
@@ -141,6 +136,8 @@ class OrdersController extends AppController
 		$this->set('order', $orderData);
 		$this->set('writers', $this->User->find('list', array('conditions' => array('User.type' => 'writer'), 'fields' => array('id', 'username') )) );
 	}		
+	
+	
 	
 	private function newOrderNotification($orderId)
 	{
