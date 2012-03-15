@@ -2,6 +2,7 @@
 
 class ArticlesController extends AppController
 {
+	
 	public $uses = array(
 		'WriterAssignment',
 		'WriterArticleSubmit',
@@ -61,7 +62,7 @@ class ArticlesController extends AppController
 			}			
 			
 			// setup validation rules
-			$this->Article->ArticleParagraph->setTitleValidationWordsCount($writerAssignment['WriterOrder']['ArticleTemplate']['paragraph_title_words_count']);
+			$this->Article->ArticleParagraph->setTitleValidationWordsCount($writerAssignment['WriterOrder']['Order']['ArticleTemplate']['paragraph_title_words_count']);
 			
 			if( $result = $this->Article->saveAssociated($this->request->data, array('validate' => 'first')) )
 			{
@@ -168,7 +169,7 @@ class ArticlesController extends AppController
 			}
 			
 			// setup validation rules
-			$this->Article->ArticleParagraph->setTitleValidationWordsCount($writerAssignment['WriterOrder']['ArticleTemplate']['paragraph_title_words_count']);
+			$this->Article->ArticleParagraph->setTitleValidationWordsCount($writerAssignment['WriterOrder']['Order']['ArticleTemplate']['paragraph_title_words_count']);
 			
 			
 			
@@ -248,7 +249,7 @@ class ArticlesController extends AppController
 		    $extension = 'docx';
 
 			
-			$templatePath = ROOT.DS.'app'.DS.'View'.DS.'Articles'.DS.'docx'.DS.$writerAssignment['WriterOrder']['ArticleTemplate']['template_file'];
+			$templatePath = ROOT.DS.'app'.DS.'View'.DS.'Articles'.DS.'docx'.DS.$writerAssignment['WriterOrder']['Order']['ArticleTemplate']['template_file'];
 			
 			$template = new DocxTemplate( $templatePath, dirname($tempFilename) );
 			

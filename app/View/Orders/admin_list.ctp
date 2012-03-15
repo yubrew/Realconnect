@@ -1,6 +1,5 @@
 <?php $this->set( 'activeTopMenuItem','/admin/orders/list'); ?>
 <h1><?php echo __('Client Orders') ?></h1>
-
 <?php
 	
 	$pagesParams	=	$this->Paginator->params();
@@ -27,13 +26,13 @@
 	<table cellpadding="0" cellspacing="0"  class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-		        <th><?php echo $this->Paginator->sort('Order.id', 'ID'); ?></th>
-		        <th><?php echo $this->Paginator->sort('Order.create_date', __('Date')); ?></th>
-		        <th><?php echo $this->Paginator->sort('Order.status', __('Status')); ?></th>
-		        <th><?php echo $this->Paginator->sort('OrderDeliveryOption.description', __('Delivery')); ?></th>
-		        <th><?php echo $this->Paginator->sort('Client.username', __('Client')); ?></th>
+		        <th><?php echo $this->Paginator->sort('Order.id', __('order id')); ?></th>
+		        <th><?php echo $this->Paginator->sort('Order.create_date', __('order date')); ?></th>
+		        <th><?php echo  __('status'); ?></th>
+		        <th><?php echo $this->Paginator->sort('ArticleTemplate.name', __('article template')); ?></th>
+		        <th><?php echo $this->Paginator->sort('Client.username', __('client')); ?></th>
 		        
-		        <th><?php echo __('Actions') ?></th>
+		        <th><?php echo __('actions') ?></th>
 		    </tr>
 		</thead>
 		<tbody>
@@ -47,8 +46,8 @@
 		    <tr>
 		        <td><?php echo h($order['Order']['id']); ?> </td>
 		        <td><?php echo date( 'm/d/y H:i:s', strtotime( $order['Order']['create_date'])); ?></td>
-		        <td><?php echo h($order['Order']['status']); ?></td>
-		        <td><?php echo h( $order['OrderDeliveryOption']['description']); ?></td>
+		        <td><?php echo $order['Order']['completed_articles_count'].'/'.$order['Order']['articles_count']. __(' completed') ?></td>
+		        <td><?php echo h( $order['ArticleTemplate']['name']); ?></td>
 		        <td><?php echo $this->Html->link($order['Client']['username'], '/admin/users/edit/'.$order['Client']['id']); ?></td>
 		        <td>
 		        	<?php echo $this->Html->link(__('Edit'), '/admin/orders/edit/'.$order['Order']['id']); ?> | 

@@ -10,7 +10,10 @@
         
         
 		  <div class="row">
-		  	<?php echo $this->Form->create('Order', array('type' => 'post', 'class' => 'form-horizontal article-edit')); ?>
+		  	<?php 
+		  	echo $this->Form->create('Order', array('type' => 'post', 'class' => 'form-horizontal article-edit')); 
+		  	echo $this->Form->hidden('article_template_id', array('value' => 1 ));
+		  	?>
 		  	
 		    <div class="span7">
 		      <h2>Article details</h2>

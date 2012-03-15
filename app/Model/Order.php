@@ -7,7 +7,8 @@ class Order extends AppModel
 		'Client' => array(
 			'className' 	=> 'User',
 			'foreignKey'	=> 'user_id'
-		)		
+		),
+		'ArticleTemplate'
 	);
 	
 	public $validate = array(

@@ -38,6 +38,9 @@ $(function(){
 	echo $this->Form->hidden('Order.create_date', array('value' => date('Y-m-d H:i:s')));
 	echo $this->Form->hidden('Order.id');
 	echo $this->Form->hidden('Order.payment_status', array('value' => 'completed'));
+	echo $this->Form->hidden('article_template_id', array('value' => 1 ));
+	
+	
 	// echo $this->Form->hidden('WriterOrder.id');
 ?>
 
@@ -95,6 +98,20 @@ $(function(){
 		</div>
 	</div>
 
+	<div class="control-group">
+		<label class="control-label" for="OrderArticleTemplateId"><?php echo __('Article Template') ?></label>
+		<div class="controls">
+		<?php
+				echo $this->Form->select('article_template_id', $articleTemplates,
+														array(
+															'label'	=>	false,
+															'empty'	=>	false,
+															'class'	=>	'input-xlarge', 
+															));
+														?>
+		</div>
+	</div>
+
 
 <?php /*
 	<div class="control-group">
@@ -124,19 +141,7 @@ $(function(){
 		)); ?>
 </div>	
 
-	<div class="control-group">
-		<label class="control-label" for="WriterOrderArticleTemplateId"><?php echo __('Article Template') ?></label>
-		<div class="controls">
-		<?php
-				echo $this->Form->select('WriterOrder.article_template_id', $articleTemplates,
-														array(
-															'label'	=>	false,
-															'empty'	=>	false,
-															'class'	=>	'input-xlarge', 
-															));
-		?>
-		</div>
-	</div>
+
 
 <h3>Keywords</h3>
 

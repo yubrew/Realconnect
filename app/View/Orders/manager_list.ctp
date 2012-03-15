@@ -34,13 +34,15 @@ $(function(){
 	<table cellpadding="0" cellspacing="0"  class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-		        <th><?php echo $this->Paginator->sort('Order.id', 'Order ID'); ?></th>
-		        <th><?php echo $this->Paginator->sort('Order.create_date', __('Date')); ?></th>
-		        <th><?php echo $this->Paginator->sort('Order.status', __('Status')); ?></th>
-		        <th><?php echo $this->Paginator->sort('OrderDeliveryOption.description', __('Delivery')); ?></th>
-		        <th><?php echo __('Hours left') ?></th>
-		        <th><?php echo $this->Paginator->sort('Client.username', __('Client')); ?></th>
-		        <th><?php echo __('Actions') ?></th>
+		        <th><?php echo $this->Paginator->sort('Order.id', __('order id')); ?></th>
+		        <th><?php echo $this->Paginator->sort('Order.create_date', __('order date')); ?></th>
+		        <th><?php echo  __('status'); ?></th>
+		        <th><?php echo $this->Paginator->sort('ArticleTemplate.name', __('article template')); ?></th>
+		        <th><?php echo $this->Paginator->sort('Client.username', __('client')); ?></th>
+		        <th><?php echo __('hours left') ?></th>
+		        <th><?php echo __('actions') ?></th>			
+			
+
 		    </tr>
 		</thead>
 		<tbody>
@@ -60,12 +62,14 @@ $(function(){
 		    <tr>
 		        <td><?php echo h($order['Order']['id']); ?> </td>
 		        <td><?php echo date( 'm/d/y H:i:s', strtotime( $order['Order']['create_date'])); ?></td>
-		        <td><?php echo h($order['Order']['status']); ?></td>
-		        <td><?php echo h($order['OrderDeliveryOption']['description']); ?></td>
-		        <td><span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo  round($secondsLeft/3600) ?>h</span></td>
+		        <td><?php echo $order['Order']['completed_articles_count'].'/'.$order['Order']['articles_count']. __(' completed') ?></td>
+		        <td><?php echo h( $order['ArticleTemplate']['name']); ?></td>
+		        
 		        <td><?php echo h($order['Client']['username']); ?></td>
+		        
+		        <td><span class="<?php echo $secondsLeft > 0 ? 'deadline-not-passed' : 'deadline-passed' ?>"><?php echo  round($secondsLeft/3600) ?>h</span></td>
 		        <td>
-		        	<?php echo $this->Html->link(__('View'), '/manager/orders/view/'.$order['Order']['id']); ?> 
+		        	<?php echo $this->Html->link(__('View & Assign'), '/manager/orders/view/'.$order['Order']['id']); ?> 
 				</td>
 		    </tr>
 		    <?php } ?>

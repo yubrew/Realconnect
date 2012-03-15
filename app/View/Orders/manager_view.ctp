@@ -110,12 +110,6 @@ $(function(){
 		)); ?>
 </div>	
 
-	<div class="control-group">
-		<label class="control-label" for="WriterOrderArticleTemplateId"><?php echo __('Article Template') ?></label>
-		<div class="controls">
-		<?php echo $this->Form->select('WriterOrder.article_template_id', $articleTemplates, array( 'label' => false, 'empty' => false, 'class' => 'input-xlarge')); ?>
-		</div>
-	</div>
 
 <h3>Keywords</h3>
 

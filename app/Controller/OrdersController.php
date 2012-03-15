@@ -31,6 +31,10 @@ class OrdersController extends AppController
 			$conditions['Order.status'] = $status;
 		}
 		
+		$this->Order->virtualFields = array(
+			'completed_articles_count' => '(SELECT COUNT(*) FROM writer_assignments wa1 LEFT JOIN writer_orders wo1 ON ( wa1.writer_order_id = wo1.id ) WHERE ( wo1.order_id = Order.id ) AND ( wa1.status = "completed" )  )'
+		);
+		
 		$this->paginate	= array(
 			'conditions' 	=>	$conditions,
 			'limit'			=>	20,
@@ -205,6 +209,11 @@ class OrdersController extends AppController
 	
 	public function manager_list( $status = 'pending') 
 	{
+		
+		$this->Order->virtualFields = array(
+			'completed_articles_count' => '(SELECT COUNT(*) FROM writer_assignments wa1 LEFT JOIN writer_orders wo1 ON ( wa1.writer_order_id = wo1.id ) WHERE ( wo1.order_id = Order.id ) AND ( wa1.status = "completed" )  )'
+		);		
+		
 		$this->paginate	= array(
 			'conditions' =>	array(
 				'Order.payment_status' => 'completed',
@@ -228,7 +237,9 @@ class OrdersController extends AppController
 		$orderData = $order = $this->Order->read(null, $orderId);
 		
 		$writers = $this->User->find('list', array('conditions' => array('User.type' => 'writer'), 'fields' => array('id', 'username') ));
+		
 		$articleTemplates =	$this->ArticleTemplate->find('list', array('fields' => array('ArticleTemplate.id', 'ArticleTemplate.name')));
+		
 		$exisitngAssignmentsCount = array(
 			'total'			=> $this->WriterAssignment->find('count', array('conditions' => array('WriterOrder.order_id' => $orderId))),
 			'in_progress'	=> $this->WriterAssignment->find('count', array('conditions' => array('WriterOrder.order_id' => $orderId, 'WriterAssignment.status' => 'in_progress'))),

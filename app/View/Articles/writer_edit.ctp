@@ -9,15 +9,15 @@ $this->start('css');
 echo $this->Html->css('atd/atd');
 $this->end();
 
-$paragraphsCount = $writerAssignment['WriterOrder']['ArticleTemplate']['paragraphs_count'];
+$paragraphsCount = $writerAssignment['WriterOrder']['Order']['ArticleTemplate']['paragraphs_count'];
 
-$wordsTotal = $writerAssignment['WriterOrder']['ArticleTemplate']['words_count'];
+$wordsTotal = $writerAssignment['WriterOrder']['Order']['ArticleTemplate']['words_count'];
 
 $wordsPerParagraph = round( $wordsTotal / $paragraphsCount);
 
 $paragraphTitleErrors = array(
 	'empty' 		=> __('Field is empty'),
-	'wordsCount'	=> __('There should be at least %s words', $writerAssignment['WriterOrder']['ArticleTemplate']['paragraph_title_words_count'])
+	'wordsCount'	=> __('There should be at least %s words', $writerAssignment['WriterOrder']['Order']['ArticleTemplate']['paragraph_title_words_count'])
 );
 
 $paragraphDescriptionErrors = array(
