@@ -8,16 +8,16 @@
 <br />
 
 <?php if( $assignments ) { ?>
-
+	<h3>Articles</h3>
 	<table cellpadding="0" cellspacing="0" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-		        <th><?php echo $this->Paginator->sort('WriterAssignment.id', 'ID'); ?></th>
-		        <th><?php echo $this->Paginator->sort('WriterAssignment.create_date', __('Date')); ?></th>
-		        <th><?php echo $this->Paginator->sort('WriterAssignment.status', __('Status')); ?></th>
-		        <th><?php echo __('Keywords') ?></th>
-		        <th><?php echo __('Hours left') ?></th>
-		        <th><?php echo __('Actions') ?></th>
+		        <th><?php echo $this->Paginator->sort('WriterAssignment.id', 'assignment id'); ?></th>
+		        <th><?php echo $this->Paginator->sort('WriterAssignment.create_date', __('date')); ?></th>
+		        <th><?php echo $this->Paginator->sort('WriterAssignment.status', __('status')); ?></th>
+		        <th><?php echo __('keywords') ?></th>
+		        <th><?php echo __('hours left') ?></th>
+		        <th><?php echo __('actions') ?></th>
 		    </tr>
 		</thead>
 		<tbody>
